@@ -4,7 +4,7 @@ class User
     private static $file = __DIR__ . '/../data/users.json';
 
     static function createUser($user, $nombre, $pass, $correo, $admin = false)
-    {   
+    {
         $users = self::getAll();
 
         $users[$user] = [
@@ -75,21 +75,16 @@ class User
         return [];
     }
 
-    public static function login($name, $password)
+    static function comprobarUser($usu)
     {
         $users = self::getAll();
-        $user = array_search()
-            if ($users['username'] === $username && password_verify($password, $user['password'])) {
-                $_SESSION['user'] = $username;
-                return true;
-            }
-        }
-        return false;
-        
+        return array_key_exists($usu, $users);
     }
 }
 
+// User::createUser("paco25", "paco", "paco", "paco");
 // var_dump(User::getAll());
-// echo User::blockUser(1) . '<br>';
-// echo User::unblockUser(5) . '<br>';
-// var_dump(User::getAll());
+// $bool1 = (User::comprobarUser("paco22"));
+// $bool2 = (User::comprobarUser("paco25"));
+
+// var_dump($bool2);
