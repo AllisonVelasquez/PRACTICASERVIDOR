@@ -1,5 +1,7 @@
 <?php
+
 $ruta = __DIR__;
+
 if (isset($_GET['opcion']) && isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
     $opcion = $_GET['opcion'];
 
@@ -12,6 +14,7 @@ if (isset($_GET['opcion']) && isset($_SESSION['usuario']) && !empty($_SESSION['u
 
         case 'libros':
             # code... redirigir al libros
+            include_once(__DIR__.'/../view/libros.php');
 
             break;
 
@@ -37,6 +40,13 @@ if (isset($_GET['opcion']) && isset($_SESSION['usuario']) && !empty($_SESSION['u
             break;
     }
 } else {
+    if(isset($_GET['opcion'])){
+        if($_GET['opcion']==='logIn'){
+            include_once('../controller/controllerLogIn.php');
+        }elseif($_GET['opcion']==='registrarse'){
+            include_once('../view/register.php');
+        }
+    }
     require_once(__DIR__ . '/../model/Book.php');
     $books = Book::getAll();
     include_once($ruta . '/../view/libros.php');
