@@ -21,7 +21,7 @@ class User
     static function delUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$user])) {
+        if (self::comprobarUser($user)) {
             unset($users[$user]);
             file_put_contents(self::$file, json_encode($users));
             return true;
@@ -32,7 +32,7 @@ class User
     static function blockUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$user])) {
+        if (self::comprobarUser($user)) {
             if ($users[$user]['blocked'] == false) {
                 $users[$user]['blocked'] = true;
                 file_put_contents(self::$file, json_encode($users));
@@ -47,7 +47,7 @@ class User
     static function unblockUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$user])) {
+        if (self::comprobarUser($user)) {
             if ($users[$user]['blocked'] == true) {
                 $users[$user]['blocked'] = false;
                 file_put_contents(self::$file, json_encode($users));
