@@ -73,6 +73,14 @@ class User
         return "Usuario $user no existe";
     }
 
+    static function getDato($user, $campo)
+    {
+        $users = self::getAll();
+        if (self::comprobarUser($user))
+            return $users[$user][$campo];
+        return "Usuario $user no existe";
+    }
+
     static function getAll()
     {
         if (file_exists(self::$file)) {
@@ -80,6 +88,7 @@ class User
         }
         return [];
     }
+
 
     static function comprobarUser($usu)
     {
