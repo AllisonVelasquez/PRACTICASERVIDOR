@@ -24,9 +24,9 @@ class User
         if (isset($users[$user])) {
             unset($users[$user]);
             file_put_contents(self::$file, json_encode($users));
-            return 'Hacido';
+            return true;
         }
-        return 'No hacido';
+        return false;
     }
 
     static function blockUser($user)
@@ -36,11 +36,11 @@ class User
             if ($users[$user]['blocked'] == false) {
                 $users[$user]['blocked'] = true;
                 file_put_contents(self::$file, json_encode($users));
-                return 'blokiado';
+                return "Usuario bloqueado con éxito";
             }
-            return 'Ya estaba blokiado bobo';
+            return "El usuario ya estaba bloqueado";
         }
-        return 'noxiste';
+        return "Nombre de usuario no existe";
     }
 
 
@@ -51,20 +51,26 @@ class User
             if ($users[$user]['blocked'] == true) {
                 $users[$user]['blocked'] = false;
                 file_put_contents(self::$file, json_encode($users));
-                return 'desblokiado';
+                return "Usuario desbloqueado con éxito";
             }
-            return 'Ya estaba desblokiado bobo';
+            return "El usuario no estaba bloqueado";
         }
-        return 'noxiste';
+        return "Nombre de usuario no existe";
     }
 
-    static function modifyName($user, $campo, $valor)
+    static function setDato($user, $campo, $valor)
     {
         $users = self::getAll();
-        if (isset($users[$user])) {
-            if ($campo == 'pass')
-                $user[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+        if (self::comprobarUser($user)) {
+            if ($campo == 'pass') {
+                $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+                return "Contraseña cambiada con éxito";
+            } else {
+                $users[$user][$campo] = $valor;
+                return "$campo modificado con éxito";
+            }
         }
+        return "Usuario $user no existe";
     }
 
     static function getAll()
@@ -80,11 +86,17 @@ class User
         $users = self::getAll();
         return array_key_exists($usu, $users);
     }
+
+    static function login($usu, $pass)
+    {
+        $users = self::getAll();
+        if (self::comprobarUser($usu)) {
+            if (password_verify($pass, $users[$usu]['pass']))
+                return true;
+            echo "Contraseña incorrecta";
+            return false;
+        }
+        echo "Usuario no existe";
+        return false;
+    }
 }
-
-// User::createUser("paco25", "paco", "paco", "paco");
-// var_dump(User::getAll());
-// $bool1 = (User::comprobarUser("paco22"));
-// $bool2 = (User::comprobarUser("paco25"));
-
-// var_dump($bool2);

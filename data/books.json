@@ -5,7 +5,8 @@
             "cantidad": 5,
             "autor": "Gabriel García Márquez",
             "genero": "Realismo mágico",
-            "descripcion": "Una novela que relata la historia de la familia Buendía en el pueblo ficticio de Macondo."
+            "descripcion": "Una novela que relata la historia de la familia Buendía en el pueblo ficticio de Macondo.",
+            "url": ""
         },
         "2": {
             "nombre": "1984",
