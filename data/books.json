@@ -1,0 +1,74 @@
+{
+    "libros": {
+        "1": {
+            "nombre": "Cien años de soledad",
+            "cantidad": 5,
+            "autor": "Gabriel García Márquez",
+            "genero": "Realismo mágico",
+            "descripcion": "Una novela que relata la historia de la familia Buendía en el pueblo ficticio de Macondo."
+        },
+        "2": {
+            "nombre": "1984",
+            "cantidad": 7,
+            "autor": "George Orwell",
+            "genero": "Distopía",
+            "descripcion": "Una novela que describe un mundo totalitario donde el gobierno controla todos los aspectos de la vida humana."
+        },
+        "3": {
+            "nombre": "El gran Gatsby",
+            "cantidad": 3,
+            "autor": "F. Scott Fitzgerald",
+            "genero": "Ficción",
+            "descripcion": "La historia de Jay Gatsby y su obsesión con Daisy Buchanan en la era del jazz en los años 20."
+        },
+        "4": {
+            "nombre": "Don Quijote de la Mancha",
+            "cantidad": 4,
+            "autor": "Miguel de Cervantes",
+            "genero": "Clásicos",
+            "descripcion": "Las aventuras de un caballero idealista y su fiel escudero, en una obra que explora la locura y la realidad."
+        },
+        "5": {
+            "nombre": "Fahrenheit 451",
+            "cantidad": 6,
+            "autor": "Ray Bradbury",
+            "genero": "Ciencia ficción",
+            "descripcion": "En un futuro distópico, los libros están prohibidos y los bomberos queman cualquier material literario encontrado."
+        },
+        "6": {
+            "nombre": "La sombra del viento",
+            "cantidad": 9,
+            "autor": "Carlos Ruiz Zafón",
+            "genero": "Misterio",
+            "descripcion": "Un joven descubre un libro en un cementerio de libros olvidados, desatando una serie de misteriosos eventos."
+        },
+        "7": {
+            "nombre": "Orgullo y prejuicio",
+            "cantidad": 2,
+            "autor": "Jane Austen",
+            "genero": "Romance",
+            "descripcion": "La historia de Elizabeth Bennet y su relación con el orgulloso señor Darcy en la Inglaterra del siglo XIX."
+        },
+        "8": {
+            "nombre": "La casa de los espíritus",
+            "cantidad": 8,
+            "autor": "Isabel Allende",
+            "genero": "Realismo mágico",
+            "descripcion": "Una saga familiar que combina lo sobrenatural y lo político, ambientada en Chile."
+        },
+        "9": {
+            "nombre": "Matar a un ruiseñor",
+            "cantidad": 5,
+            "autor": "Harper Lee",
+            "genero": "Ficción",
+            "descripcion": "Una historia sobre la injusticia racial en el sur de Estados Unidos, vista a través de los ojos de una niña."
+        },
+        "10": {
+            "nombre": "El alquimista",
+            "cantidad": 10,
+            "autor": "Paulo Coelho",
+            "genero": "Ficción",
+            "descripcion": "La búsqueda de Santiago, un joven pastor que viaja en busca de un tesoro personal, en una alegoría sobre el destino."
+        }
+    }
+}
