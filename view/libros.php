@@ -21,7 +21,7 @@
                 <select name="nombre" id="nombre" class="form-select">
 
                 <!--Aqui hayq eu dejar que la opcion de filtro permanezca y añadir un boton de quitar filtros-->
-                    <option value="">Todos <?php if() ?></option>
+                    <option value="">Todos <?php  ?></option>
                     <?php foreach ($nombres as $nombre) { ?>
                         <option value="<?php echo htmlspecialchars($nombre) ?>"
                             <?php (isset($_GET['nombre']) && $_GET['nombre'] === $nombre) ? 'selected' : '' ?>>
@@ -77,22 +77,25 @@
 
     // Muestra los resultados filtrados
     if (!empty($filteredBooks)) { ?>
-        <div class="flex-column"><?php
-                            foreach ($filteredBooks as $book) { ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="<?php echo $book['url']; ?>" class="card-img-top" alt="Imagen del libro">
-                        <div class="card-body d-flex flex-direction:rows justify-center align-items">
+       <div class="container my-4">
+    <div class="row g-4">
+        <?php foreach ($filteredBooks as $book) { ?>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card h-100">
+                        <div class="ratio " style="--bs-aspect-ratio: 160%;">
+                            <img src="<?php echo $book['url']; ?>" class="img-fluid rounded" alt="Imagen del libro">
+                        </div>
+                        <div class="card-body d-flex flex-column justify-content-between">
                             <p class="card-text"><strong>Autor:</strong> <?php echo $book['autor']; ?></p>
                             <p class="card-text"><strong>Género:</strong> <?php echo $book['genero']; ?></p>
-                            <p class="card-text"><strong>Descripcion:</strong> <?php echo $book['descripcion']; ?></p>
-
+                            <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                         </div>
                     </div>
                 </div>
-            <?php  }
-            ?>
+            <?php } ?>
         </div>
+    </div>
+
     <?php
     } else {
         echo '<p class="text-center">No se encontraron libros con los criterios proporcionados.</p>';

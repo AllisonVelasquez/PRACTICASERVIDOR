@@ -11,9 +11,7 @@ echo '<th scope="col"> Blokeado</th>';
 
 foreach ($users as $key => $value) { ?>
     <tr>
-        <th
-            scope="col"><?php echo $key; ?>
-        </th>
+        <th scope="col"><?php echo $key; ?></th>
         <td><?php echo $value['nombre']; ?></td>
         <td><?php echo $value['correo']; ?></td>
         <td>

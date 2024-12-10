@@ -1,55 +1,67 @@
 <?php
-require(__DIR__ . '/../view/header.php');
+include_once(__DIR__ . '/../view/header.php');
+require(__DIR__ . '/../model/Book.php');
 
 if (isset($_GET['opcion'])) {
     $opcion = $_GET['opcion'];
 
-    switch ($opcion) {
+    /* si el usuario se ha logueado tiene acceso a estas paginas */
+    if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
+        require(__DIR__ . '/../model/Checkout.php');
+        require_once(__DIR__ . '/../model/User.php');
 
-        case 'logIn':
-            include_once(__DIR__ . '/../controller/controllerLogIn.php');
-            break;
+        switch ($opcion) {
+            case 'logout':
+                //elimina la cookie del usuario y redirige al login
+                setcookie('preferencias', '', time() - 10000);
+                header('Location:./controllerLogIn.php');
+                break;
 
-        case 'registrarse':
-            include_once(__DIR__ . '/../view/register.php');
-            break;
+            case 'libros':
+                # code... redirigir al libros
+                include(__DIR__ . '/../view/libros.php');
 
-        case 'logout':
-            //elimina la cookie del usuario y redirige al login
-            setcookie('usuario', '', time() - 10000);
-            header('Location:./controllerLogIn.php');
-            break;
+                break;
 
-        case 'libros':
-            # code... redirigir al libros
-            include_once(__DIR__ . '/../view/libros.php');
+            case 'misPrestamos':
+                $prestamos = Checkout::getAll();
+                # code... redirigir al misPrestamos
+                include(__DIR__ . '/../view/misPrestamos.php');
+                break;
+            case 'gestionUsuarios':
+                $users = User::getAll();
+                # code... redirigir al gestionUsuarios
+                include(__DIR__ . '/../view/gestionDeUsuarios.php');
+                break;
+            case 'verPrestamos':
+                # code... redirigir al gestionarUsuarios
+                break;
 
-            break;
+            case 'registroLibros':
+                # code... redirigir al gestionarLibros
+                break;
+            case 'gestionDeUsuarios':
+                # code... redirigir al gestionarLibros
+                break;
 
-        case 'misPrestamos':
-            # code... redirigir al misPrestamos
-            break;
-        case 'gestionUsuarios':
-            require_once(__DIR__ . '/../model/User.php');
-            $users = User::getAll();
-            # code... redirigir al gestionUsuarios
-            include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
-            break;
-        case 'gestionarUsuarios':
-            # code... redirigir al gestionarUsuarios
-            break;
-
-        case 'gestionarLibros':
-            # code... redirigir al gestionarLibros
-            break;
-
-        default:
-            # code... redirrigir al principal
-            echo 'DEFAULT index controller';
-            break;
+        }
     }
-} else {
-    require_once(__DIR__ . '/../model/Book.php');
+    /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */
+    if (!isset($_SESSION['usuario'])) {
+        switch ($opcion) {
+            case 'logIn':
+                include(__DIR__ . '/../controller/controllerLogIn.php');
+                break;
+
+            case 'registrarse':
+                include(__DIR__ . '/../view/register.php');
+                break;
+
+        }
+    }
+}
+
+else {
     $books = Book::getAll();
-    include_once(__DIR__ . '/../view/libros.php');
+    include(__DIR__ . '/../view/libros.php');
 }

@@ -16,25 +16,22 @@ if (isset($_POST["login"])) {
     if (!isset($errores)) {
         session_start();
         if (User::login($nombre, $password)) {
-            $_SESSION['usuario'] = $nombre;
+            $_SESSION['usuario'] = [
+                "nombreUsu" => $nombre,
+                "admin" => User::getDato($nombre, campo: 'admin')
+            ];
             header('location:../controller/controllerIndex.php?opcion=libros');
+            exit;
         }
-
-
-        exit;
     } else {
         foreach ($errores as $key => $value) {
             # code...
             echo '<p style=color:red>' . $value . '</p>';
         }
-        include('../view/logIn.php');
+        include_once('../view/logIn.php');
     }
-} /* else if (isset($_GET['opcion'])) {
-    if ($_GET['opcion'] === 'logIn') {
-        header('location: ../view/logIn.php');
-        exit;
-}    } */ else {
+} else {
     //si el usuario es la primera vez que entra se muestra el formulario de login
-    header('location: ../view/logIn.php');
+    include_once('../view/logIn.php');
     exit;
 }
