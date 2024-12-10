@@ -19,7 +19,9 @@
             <div class="col-md-4">
                 <label for="nombre" class="form-label">Nombre del libro:</label>
                 <select name="nombre" id="nombre" class="form-select">
-                    <option value="">Todos</option>
+
+                <!--Aqui hayq eu dejar que la opcion de filtro permanezca y añadir un boton de quitar filtros-->
+                    <option value="">Todos <?php if() ?></option>
                     <?php foreach ($nombres as $nombre) { ?>
                         <option value="<?php echo htmlspecialchars($nombre) ?>"
                             <?php (isset($_GET['nombre']) && $_GET['nombre'] === $nombre) ? 'selected' : '' ?>>
