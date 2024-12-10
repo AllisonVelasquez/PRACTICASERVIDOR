@@ -24,7 +24,7 @@ class Book
     static function setDato($id, $campo, $value)
     {
         $libros = self::getAll();
-        if (self::comprobarId($id)) {
+        if (self::comprobarBook($id)) {
             $libros[$id][$campo] = $value;
             return "$campo modificado con éxito";
         }
@@ -34,7 +34,7 @@ class Book
     static function getDato($id, $campo)
     {
         $libros = self::getAll();
-        if (self::comprobarId($id))
+        if (self::comprobarBook($id))
             return $libros[$id][$campo];
         return "No hay ningún libro con el id $id";
     }
@@ -42,7 +42,7 @@ class Book
     static function delBook($id)
     {
         $libros = self::getAll();
-        if (self::comprobarId($id)) {
+        if (self::comprobarBook($id)) {
             unset($libros[$id]);
             file_put_contents(self::$file, json_encode($libros));
             return true;
@@ -50,7 +50,7 @@ class Book
         return false;
     }
 
-    static function comprobarId($id)
+    static function comprobarBook($id)
     {
         $libros = self::getAll();
         return array_key_exists($id, $libros);
@@ -67,7 +67,7 @@ class Book
     static function prestado($id)
     {
         $libros = self::getAll();
-        if (self::comprobarId($id)) {
+        if (self::comprobarBook($id)) {
             $libros[$id]['cant'] -= 1;
             file_put_contents(self::$file, json_encode($libros));
             return true;
@@ -78,7 +78,7 @@ class Book
     static function devuelto($id)
     {
         $libros = self::getAll();
-        if (self::comprobarId($id)) {
+        if (self::comprobarBook($id)) {
             $libros[$id]['cant'] += 1;
             file_put_contents(self::$file, json_encode($libros));
             return true;
