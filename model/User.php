@@ -101,11 +101,9 @@ class User
         $users = self::getAll();
         if (self::comprobarUser($usu)) {
             if (password_verify($pass, $users[$usu]['pass']))
-                return true;
-            echo "Contraseña incorrecta";
-            return false;
+                return "hecho";
+            return "Contraseña incorrecta";
         }
-        echo "Usuario no existe";
-        return false;
+        return "Usuario no existe";
     }
 }

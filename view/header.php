@@ -12,6 +12,7 @@
     <header>
         <?php if (isset($_SESSION['usuario'])) {
             echo '<a href="../controller/controllerIndex.php?opcion=logOut">Cerrar Session </a>';
+            //falta mostrar Mis prestamos
         } else {
             echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Session </a>';
             echo '<a href="../controller/controllerIndex.php?opcion=registrarse"> Registrarme</a>';
