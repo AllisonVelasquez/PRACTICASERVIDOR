@@ -1,4 +1,5 @@
 <?php
+require(__DIR__ . '/../view/header.php');
 
 if (isset($_GET['opcion'])) {
     $opcion = $_GET['opcion'];
