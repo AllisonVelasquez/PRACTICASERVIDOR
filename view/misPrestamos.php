@@ -2,7 +2,6 @@
 // Ejemplo de datos en $prestamos
 /* $prestamos =Checkout::getAll();
  */
-echo('sadasd');
 ?>
 
 <div class="container my-4">
