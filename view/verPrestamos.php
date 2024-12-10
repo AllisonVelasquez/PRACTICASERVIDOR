@@ -1,10 +1,3 @@
-<?php
-// Ejemplo de datos en $prestamos
-/* $prestamos =Checkout::getAll();
- */
-
-?>
-
 <div class="container my-4">
     <h2 class="mb-4">Listado de Préstamos</h2>
     <table class="table table-striped table-bordered">
@@ -19,13 +12,15 @@
             </tr>
         </thead>
         <tbody>
+            <!-- FALTA AÑADIR EL METODO ADDDAYS DE CHECKOUT PARA AMPLIAR EL PLAZO DE DEVOLUCION -->
             <?php foreach ($prestamos as $id => $prestamo) { ?>
                     <tr>
                         <td><?php echo $id; ?></td>
                         <td><?php echo $prestamo['idUser']; ?></td>
                         <td><?php echo $prestamo['idBook']; ?></td>
                         <td><?php echo date("d-m-Y", $prestamo['dateP']); ?></td>
-                        <td><?php echo date("d-m-Y", $prestamo['dateD']); ?></td>
+                        <td><?php echo date("d-m-Y", $prestamo['dateD']); ?>
+                    </td>
                         <td>
                             <?php echo $prestamo['devuelto'] ? 'Sí' : 'No'; ?>
                         </td>

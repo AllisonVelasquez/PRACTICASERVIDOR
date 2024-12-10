@@ -1,8 +1,7 @@
 <div class="container my-5">
     <h1 class="text-center mb-4">Ingreso de Libro</h1>
 
-    <!-- Formulario para ingresar un libro -->
-    <form method="POST" action="" enctype="multipart/form-data">
+    <form method="POST" action="../controller/controllerRegistroLibros.php" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre del Libro</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -33,6 +32,6 @@
             <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar Libro</button>
+        <button type="submit" name="addLibro" class="btn btn-primary">Guardar Libro</button>
     </form>
 </div>

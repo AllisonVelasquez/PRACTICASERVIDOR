@@ -1,7 +1,5 @@
 <?php
 
-/* meter la cookie de prefererncias con
-modificar class a table-dark o ''  */
 echo '<table class="table table-striped table-bordered">';
 echo '<th scope="col"> Nombre de Usuario</th>';
 echo '<th scope="col"> Nombre</th>';

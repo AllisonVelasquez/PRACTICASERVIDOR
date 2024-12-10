@@ -8,9 +8,11 @@ class Checkout
     static function createCheckout($idUser, $idBook)
     {
         $prestamos = self::getAll();
-
-        $id = array_key_last($prestamos) + 1;
-
+        if (empty($prestamos)) {
+            $id = 1;
+        } else {
+            $id = array_key_last($prestamos) + 1;
+        }
         $prestamos[$id] = [
             'idUser' => $idUser,
             'idBook' => $idBook,

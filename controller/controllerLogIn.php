@@ -1,7 +1,6 @@
 <?php
-//Controlador del login
-require_once('../view/index.php');
 
+session_start();
 if (isset($_POST["login"])) {
     if (isset($_POST['nombre']) && !empty($_POST['nombre'])) {
         $nombre = $_POST['nombre'];
@@ -14,13 +13,14 @@ if (isset($_POST["login"])) {
         $errores['password'] = 'El campo password es obligatorio';
     }
     if (!isset($errores)) {
-        session_start();
+        require(__DIR__ . '/../model/User.php');
         if (User::login($nombre, $password)) {
+
             $_SESSION['usuario'] = [
                 "nombreUsu" => $nombre,
                 "admin" => User::getDato($nombre, campo: 'admin')
             ];
-            header('location:../controller/controllerIndex.php?opcion=libros');
+            header(header: 'Location:../controller/controllerIndex.php');
             exit;
         }
     } else {
@@ -29,9 +29,10 @@ if (isset($_POST["login"])) {
             echo '<p style=color:red>' . $value . '</p>';
         }
         include_once('../view/logIn.php');
+        exit;
     }
 } else {
     //si el usuario es la primera vez que entra se muestra el formulario de login
-    include_once('../view/logIn.php');
+    include('../view/logIn.php');
     exit;
 }
