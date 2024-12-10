@@ -18,6 +18,34 @@ class Checkout
 
         file_put_contents(self::$file, json_encode($prestamos));
     }
+
+    // static function delCheckout($id)
+    // {
+    //     $prestamos = self::getAll();
+    //     if (self::comprobarCheckout($id)) {
+    //         unset($prestamos[$id]);
+    //         file_put_contents(self::$file, json_encode($prestamos));
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    // static function addDays($id, $cantidadDias)
+    // {
+    //     $prestamos = self::getAll();
+    //     if (self::comprobarCheckout($id)) {
+    //         $prestamos[$id]['dateD'] += ($cantidadDias * 86400);
+    //     }
+    // }
+
+    // static function getDato($id, $campo)
+    // {
+    //     $prestamos = self::getAll();
+    //     if (self::comprobarCheckout($id))
+    //         return $prestamos[$id][$campo];
+    //     return "El préstamo $id no existe";
+    // }
+
     static function getAll()
     {
         if (file_exists(self::$file)) {
@@ -25,4 +53,10 @@ class Checkout
         }
         return [];
     }
+
+    // static function comprobarCheckout($id)
+    // {
+    //     $prestamos = self::getAll();
+    //     return array_key_exists($id, $prestamos);
+    // }
 }
