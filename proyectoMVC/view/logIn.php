@@ -1,5 +1,5 @@
 <form action="../controller/controllerLogIn.php" method="post">
-    <label for="nombre">Nombre</label><br>
+    <label for="nombre">Nombre Usuario</label><br>
     <input type="text" name="nombre" id="nombre"><br>
     <label for="nombre">Contraseña</label><br>
     <input type="password" name="password" id="password"><br>

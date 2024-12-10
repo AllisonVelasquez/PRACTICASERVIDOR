@@ -3,12 +3,11 @@ class User
 {
     private static $file = __DIR__ . '/../data/users.json';
 
-    static function createUser($nombre, $pass, $correo, $admin = false)
+    static function createUser($user, $nombre, $pass, $correo, $admin = false)
     {
         $users = self::getAll();
-        //$id = array_key_last($users) + 1;
 
-        $users[$id] = [
+        $users[$user] = [
             'nombre' => $nombre,
             'pass' => password_hash($pass, PASSWORD_DEFAULT),
             'correo' => $correo,
@@ -19,53 +18,67 @@ class User
         file_put_contents(self::$file, json_encode($users));
     }
 
-    static function delUser($id)
+    static function delUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$id])) {
-            unset($users[$id]);
+        if (self::comprobarUser($user)) {
+            unset($users[$user]);
             file_put_contents(self::$file, json_encode($users));
-            return 'Hacido';
+            return true;
         }
-        return 'No hacido';
+        return false;
     }
 
-    static function blockUser($id)
+    static function blockUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$id])) {
-            if ($users[$id]['blocked'] == false) {
-                $users[$id]['blocked'] = true;
+        if (self::comprobarUser($user)) {
+            if ($users[$user]['blocked'] == false) {
+                $users[$user]['blocked'] = true;
                 file_put_contents(self::$file, json_encode($users));
-                return 'blokiado';
+                return "Usuario bloqueado con éxito";
             }
-            return 'Ya estaba blokiado bobo';
+            return "El usuario ya estaba bloqueado";
         }
-        return 'noxiste';
+        return "Nombre de usuario no existe";
     }
 
 
-    static function unblockUser($id)
+    static function unblockUser($user)
     {
         $users = self::getAll();
-        if (isset($users[$id])) {
-            if ($users[$id]['blocked'] == true) {
-                $users[$id]['blocked'] = false;
+        if (self::comprobarUser($user)) {
+            if ($users[$user]['blocked'] == true) {
+                $users[$user]['blocked'] = false;
                 file_put_contents(self::$file, json_encode($users));
-                return 'desblokiado';
+                return "Usuario desbloqueado con éxito";
             }
-            return 'Ya estaba desblokiado bobo';
+            return "El usuario no estaba bloqueado";
         }
-        return 'noxiste';
+        return "Nombre de usuario no existe";
     }
 
-    static function modifyName($id, $campo, $valor)
+    static function setDato($user, $campo, $valor)
     {
         $users = self::getAll();
-        if (isset($users[$id])) {
-            if ($campo == 'pass')
-                $user[$id][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+        if (self::comprobarUser($user)) {
+            if ($campo == 'pass') {
+                $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+                return "Contraseña cambiada con éxito";
+            } else {
+                $users[$user][$campo] = $valor;
+                return "$campo modificado con éxito";
+            }
         }
+        return "Usuario $user no existe";
+    }
+
+    static function getDato($user, $campo)
+    {
+        $users = self::getAll();
+        if (self::comprobarUser($user))
+            return $users[$user][$campo];
+        return "Usuario $user no existe";
     }
 
     static function getAll()
@@ -76,20 +89,23 @@ class User
         return [];
     }
 
-    public static function login($name, $password)
+
+    static function comprobarUser($usu)
     {
         $users = self::getAll();
-        $id = array_search()
-            if ($users['username'] === $username && password_verify($password, $user['password'])) {
-                $_SESSION['user'] = $username;
+        return array_key_exists($usu, $users);
+    }
+
+    static function login($usu, $pass)
+    {
+        $users = self::getAll();
+        if (self::comprobarUser($usu)) {
+            if (password_verify($pass, $users[$usu]['pass']))
                 return true;
-            }
+            echo "Contraseña incorrecta";
+            return false;
         }
+        echo "Usuario no existe";
         return false;
     }
 }
-
-// var_dump(User::getAll());
-// echo User::blockUser(1) . '<br>';
-// echo User::unblockUser(5) . '<br>';
-// var_dump(User::getAll());

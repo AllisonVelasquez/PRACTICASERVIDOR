@@ -15,13 +15,12 @@ if (isset($_POST["login"])) {
     }
     if (!isset($errores)) {
         session_start();
-        //buscar el usuario y la contraseña en el json 
-        //sacamos su id y nombre parab almacenarlo en la cookie
+        if (User::login($nombre, $password)) {
+            $_SESSION['usuario'] = $nombre;
+            header('location:../controller/controllerIndex.php?opcion=libros');
+        }
 
-        //$usuarios= createUser();
 
-        $_SESSION['usuario'] = $id;
-        header('location:../controller/controllerIndex.php?opcion=libros');
         exit;
     } else {
         foreach ($errores as $key => $value) {
@@ -34,8 +33,7 @@ if (isset($_POST["login"])) {
     if ($_GET['opcion'] === 'logIn') {
         header('location: ../view/logIn.php');
         exit;
-}    } */
- else {
+}    } */ else {
     //si el usuario es la primera vez que entra se muestra el formulario de login
     header('location: ../view/logIn.php');
     exit;

@@ -1,37 +1,37 @@
 {
-  "1": {
-    "nombre": "juan",
-    "pass": "$2y$10$/i6UYWSeX/FExv2Z5PDjUucyfuau6akSqS4gRl5q4v8nb5Tbs3Q6K",
-    "correo": "joel",
-    "admin": false,
-    "blocked": true
-  },
-  "3": {
-    "nombre": "joel",
-    "pass": "$2y$10$6oJIbb.OA/4TFu9SzHpiyuB5pp5a/YOlx9tCcjHQJwBxLTVkVKXi6",
-    "correo": "joel",
-    "admin": false,
-    "blocked": false
-  },
-  "4": {
-    "nombre": "allison",
-    "pass": "$2y$10$IscjD8vmgJXyJDU.N0y9b.cHIBuNAGudhqVrx0sMwSfbLPsn.hRh2",
-    "correo": "joel",
-    "admin": false,
-    "blocked": false
-  },
-  "5": {
-    "nombre": "iago",
-    "pass": "$2y$10$maTFkGW01IocfVASRtsaeOLKgQB1yI0xM13dWZjcjaGYwdM7WaNTa",
-    "correo": "iago",
-    "admin": false,
-    "blocked": false
-  },
-  "6": {
-    "nombre": "iago",
-    "pass": "$2y$10$WHDFTgzhxr9FYfIHnFSAOeac.i.yvy60SiWSS5wOXEFeEm.Aein82",
-    "correo": "iago",
-    "admin": false,
-    "blocked": false
+    "1": {
+      "nombre": "juan",
+      "pass": "$2y$10$/i6UYWSeX/FExv2Z5PDjUucyfuau6akSqS4gRl5q4v8nb5Tbs3Q6K",
+      "correo": "joel",
+      "admin": false,
+      "blocked": true
+    },
+    "3": {
+      "nombre": "joel",
+      "pass": "$2y$10$6oJIbb.OA/4TFu9SzHpiyuB5pp5a/YOlx9tCcjHQJwBxLTVkVKXi6",
+      "correo": "joel",
+      "admin": false,
+      "blocked": false
+    },
+    "4": {
+      "nombre": "allison",
+      "pass": "$2y$10$IscjD8vmgJXyJDU.N0y9b.cHIBuNAGudhqVrx0sMwSfbLPsn.hRh2",
+      "correo": "joel",
+      "admin": false,
+      "blocked": false
+    },
+    "5": {
+      "nombre": "iago",
+      "pass": "$2y$10$maTFkGW01IocfVASRtsaeOLKgQB1yI0xM13dWZjcjaGYwdM7WaNTa",
+      "correo": "iago",
+      "admin": false,
+      "blocked": false
+    },
+    "6": {
+      "nombre": "iago",
+      "pass": "$2y$10$WHDFTgzhxr9FYfIHnFSAOeac.i.yvy60SiWSS5wOXEFeEm.Aein82",
+      "correo": "iago",
+      "admin": false,
+      "blocked": false
+    }
   }
-}

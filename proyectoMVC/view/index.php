@@ -23,22 +23,19 @@
         margin: 2em
     }
 
-/*     #contenido {}
+    /*     #contenido {}
 
     footer {} */
 </style>
 
 <body>
-<header>
+    <header>
         <?php if (isset($_COOKIE['usuario'])) {
-                        echo '<a href="../controller/controllerIndex.php?opcion=logOut">Cerrar Session </a>';
-
-
+            echo '<a href="../controller/controllerIndex.php?opcion=logOut">Cerrar Session </a>';
         } else {
             echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Session </a>';
             echo '<a href="../controller/controllerIndex.php?opcion=registrarse"> Registrarme</a>';
-
         } ?>
     </header>
 
-    <?php require_once(__DIR__.'/../controller/controllerIndex.php');?>
+    <?php require_once(__DIR__ . '/../controller/controllerIndex.php'); ?>

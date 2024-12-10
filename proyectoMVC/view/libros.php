@@ -1,3 +1,4 @@
+
 <div class="container my-5">
     <h1 class="text-center mb-4">Filtrar Libros</h1>
 
@@ -5,7 +6,6 @@
 
     // Obtiene todos los libros
     $books = Book::getAll();
-
     // Extrae opciones únicas para los selects
     $nombres = array_unique(array_column($books, 'nombre'));
     $autores = array_unique(array_column($books, 'autor'));
@@ -75,11 +75,11 @@
 
     // Muestra los resultados filtrados
     if (!empty($filteredBooks)) { ?>
-        <div class="row"><?php
+        <div class="flex-column"><?php
                             foreach ($filteredBooks as $book) { ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="<?php echo $book['ruta']; ?>" class="card-img-top" alt="Imagen del libro">
+                        <img src="<?php echo $book['url']; ?>" class="card-img-top" alt="Imagen del libro">
                         <div class="card-body d-flex flex-direction:rows justify-center align-items">
                             <p class="card-text"><strong>Autor:</strong> <?php echo $book['autor']; ?></p>
                             <p class="card-text"><strong>Género:</strong> <?php echo $book['genero']; ?></p>
