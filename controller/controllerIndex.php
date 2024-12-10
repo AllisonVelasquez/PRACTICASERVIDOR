@@ -1,11 +1,18 @@
 <?php
 
-$ruta = __DIR__;
-
-if (isset($_GET['opcion']) && isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
+if (isset($_GET['opcion'])) {
     $opcion = $_GET['opcion'];
 
     switch ($opcion) {
+
+        case 'logIn':
+            include_once(__DIR__ . '/../controller/controllerLogIn.php');
+            break;
+
+        case 'registrarse':
+            include_once(__DIR__ . '/../view/register.php');
+            break;
+
         case 'logout':
             //elimina la cookie del usuario y redirige al login
             setcookie('usuario', '', time() - 10000);
@@ -35,24 +42,13 @@ if (isset($_GET['opcion']) && isset($_SESSION['usuario']) && !empty($_SESSION['u
             # code... redirigir al gestionarLibros
             break;
 
-
-
-
         default:
             # code... redirrigir al principal
             echo 'DEFAULT index controller';
             break;
     }
 } else {
-    if (isset($_GET['opcion'])) {
-        if ($_GET['opcion'] === 'logIn') {
-            include_once('../controller/controllerLogIn.php');
-        } elseif ($_GET['opcion'] === 'registrarse') {
-            include_once('../view/register.php');
-        }
-    } else {
-        require_once(__DIR__ . '/../model/Book.php');
-        $books = Book::getAll();
-        include_once($ruta . '/../view/libros.php');
-    }
+    require_once(__DIR__ . '/../model/Book.php');
+    $books = Book::getAll();
+    include_once(__DIR__ . '/../view/libros.php');
 }
