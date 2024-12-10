@@ -3,7 +3,7 @@ class Book
 {
     private static $file = __DIR__ . '/../data/books.json';
 
-    static function createBook($nombre, $cant, $autor, $gen, $desc)
+    static function createBook($nombre, $cant, $autor, $gen, $desc, $url)
     {
         $libros = self::getAll();
 
@@ -14,7 +14,8 @@ class Book
             'cant' => $cant,
             'autor' => $autor,
             'gen' => $gen,
-            'desc' => $desc
+            'desc' => $desc,
+            'url' => $url
         ];
 
         file_put_contents(self::$file, json_encode($libros));
