@@ -95,13 +95,6 @@ class User
         $users = self::getAll();
         return array_key_exists($usu, $users);
     }
-<<<<<<< HEAD
-}
-// User::createUser("paco25", "paco", "paco", "paco");
-// var_dump(User::getAll());
-// $bool1 = (User::comprobarUser("paco22"));
-// $bool2 = (User::comprobarUser("paco25"));
-=======
 
     static function login($usu, $pass)
     {
@@ -116,4 +109,3 @@ class User
         return false;
     }
 }
->>>>>>> modelo2.0
