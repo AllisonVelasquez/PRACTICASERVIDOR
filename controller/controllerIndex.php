@@ -1,17 +1,26 @@
 <?php
-require(__DIR__ . '/../view/header.php');
+
 
 if (isset($_GET['opcion'])) {
     $opcion = $_GET['opcion'];
+    session_start();
 
+    //Se guarda la opcion seleccionada para mantenerla activa en el nav del header
+    $_SESSION['option'] = $opcion;
+
+    require(__DIR__ . '/../view/header.php');
     switch ($opcion) {
 
         case 'logIn':
+
             include_once(__DIR__ . '/../controller/controllerLogIn.php');
+
             break;
 
         case 'registrarse':
+
             include_once(__DIR__ . '/../view/register.php');
+
             break;
 
         case 'logout':
@@ -21,35 +30,44 @@ if (isset($_GET['opcion'])) {
             break;
 
         case 'libros':
-            # code... redirigir al libros
+
             include_once(__DIR__ . '/../view/libros.php');
 
             break;
 
         case 'misPrestamos':
-            # code... redirigir al misPrestamos
+
+            include_once(__DIR__ . '/../view/misPrestamos.php');
+
             break;
         case 'gestionUsuarios':
+
             require_once(__DIR__ . '/../model/User.php');
+
             $users = User::getAll();
-            # code... redirigir al gestionUsuarios
+
             include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
+
             break;
-        case 'gestionarUsuarios':
-            # code... redirigir al gestionarUsuarios
+        case 'miPerfil':
+
+            include_once(__DIR__ . '/../view/miPerfil.php');
+
             break;
 
         case 'gestionarLibros':
-            # code... redirigir al gestionarLibros
+
             break;
 
         default:
-            # code... redirrigir al principal
+
             echo 'DEFAULT index controller';
+
             break;
     }
 } else {
-    require_once(__DIR__ . '/../model/Book.php');
+    require(__DIR__ . '/../view/header.php');
+    require_once('../cargador.php');
     $books = Book::getAll();
     include_once(__DIR__ . '/../view/libros.php');
 }

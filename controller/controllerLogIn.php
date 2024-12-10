@@ -1,8 +1,8 @@
 <?php
 //Controlador del login
-require_once('../view/index.php');
+require_once('../cargador.php');
 if (!isset($_POST['login'])) {
-    header('location: ' . __DIR__ . '../view/logIn.php');
+    header('location: ../view/logIn.php');
 } else {
     $nombre = $_POST['nombre'];
     $password = $_POST['password'];
@@ -10,7 +10,9 @@ if (!isset($_POST['login'])) {
     $resultadoLogin = User::login($nombre, $password);
     if ($resultadoLogin == 'hecho') {
         $_SESSION['usuario'] = $nombre;
-        header('location:' . __DIR__ . '../controller/controllerIndex.php?opcion=libros');
-    } else
-        echo $resultadoLogin;
+        header('location: ../controller/controllerIndex.php?opcion=libros');
+    } else {
+        $_SESSION['errorLogin'] = $resultadoLogin;
+        header('location: ../view/logIn.php');
+    }
 }

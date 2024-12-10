@@ -21,7 +21,7 @@ class User
     static function delUser($user)
     {
         $users = self::getAll();
-        if (self::comprobarUser($user)) {
+        if (self::comprobarUser($users, $user)) {
             unset($users[$user]);
             file_put_contents(self::$file, json_encode($users));
             return true;
@@ -32,7 +32,7 @@ class User
     static function blockUser($user)
     {
         $users = self::getAll();
-        if (self::comprobarUser($user)) {
+        if (self::comprobarUser($users, $user)) {
             if ($users[$user]['blocked'] == false) {
                 $users[$user]['blocked'] = true;
                 file_put_contents(self::$file, json_encode($users));
@@ -47,7 +47,7 @@ class User
     static function unblockUser($user)
     {
         $users = self::getAll();
-        if (self::comprobarUser($user)) {
+        if (self::comprobarUser($users, $user)) {
             if ($users[$user]['blocked'] == true) {
                 $users[$user]['blocked'] = false;
                 file_put_contents(self::$file, json_encode($users));
@@ -61,7 +61,7 @@ class User
     static function setDato($user, $campo, $valor)
     {
         $users = self::getAll();
-        if (self::comprobarUser($user)) {
+        if (self::comprobarUser($users, $user)) {
             if ($campo == 'pass') {
                 $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
                 return "Contraseña cambiada con éxito";
@@ -76,7 +76,7 @@ class User
     static function getDato($user, $campo)
     {
         $users = self::getAll();
-        if (self::comprobarUser($user))
+        if (self::comprobarUser($users, $user))
             return $users[$user][$campo];
         return "Usuario $user no existe";
     }
@@ -90,16 +90,16 @@ class User
     }
 
 
-    static function comprobarUser($usu)
+    static function comprobarUser($users, $usu)
     {
-        $users = self::getAll();
+
         return array_key_exists($usu, $users);
     }
 
     static function login($usu, $pass)
     {
         $users = self::getAll();
-        if (self::comprobarUser($usu)) {
+        if (self::comprobarUser($users, $usu)) {
             if (password_verify($pass, $users[$usu]['pass']))
                 return "hecho";
             return "Contraseña incorrecta";
@@ -107,3 +107,4 @@ class User
         return "Usuario no existe";
     }
 }
+User::createUser('allis', 'allis', 'allis', 'allis@gmail.com', true);
