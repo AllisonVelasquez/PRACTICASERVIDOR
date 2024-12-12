@@ -18,9 +18,9 @@ if (isset($_POST["login"])) {
 
             $_SESSION['usuario'] = [
                 "nombreUsu" => $nombre,
-                "admin" => User::getDato($nombre, campo: 'admin')
+                "admin" => User::getDato($nombre,'admin')
             ];
-            header(header: 'Location:../controller/controllerIndex.php');
+            header('Location:../controller/controllerIndex.php');
             exit;
         }
     } else {

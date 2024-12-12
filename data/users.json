@@ -1,1 +1,16 @@
-{"joel":{"nombre":"joel","pass":"$2y$10$u\/8fY6f8ywfHGBam.aTcDOuICy.0ODC0uneAGfkM87\/u2gcymLmvq","correo":"joel@gmail.com","admin":false,"blocked":false},"Juan":{"nombre":"Juan","pass":"$2y$10$KD2WWoWxV4ekTzq9DrLy\/ONSZeaGqP5mPwBjxOhlsaM0RMPc0dAgu","correo":"Juan@gmail.com","admin":false,"blocked":false}}
+{
+    "joel": {
+        "nombre": "joel",
+        "pass": "$2y$10$u\/8fY6f8ywfHGBam.aTcDOuICy.0ODC0uneAGfkM87\/u2gcymLmvq",
+        "correo": "joel@gmail.com",
+        "admin": false,
+        "blocked": true
+    },
+    "Juan": {
+        "nombre": "Juan",
+        "pass": "$2y$10$KD2WWoWxV4ekTzq9DrLy\/ONSZeaGqP5mPwBjxOhlsaM0RMPc0dAgu",
+        "correo": "Juan@gmail.com",
+        "admin": false,
+        "blocked": false
+    }
+}

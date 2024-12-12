@@ -1,8 +1,9 @@
 <?php
 session_start();
-require(__DIR__ . '/../view/header.php');
-require_once(__DIR__ . '/../model/Book.php');
+
 if (isset($_GET['opcion'])) {
+    require(__DIR__ . '/../view/header.php');
+    require_once(__DIR__ . '/../model/Book.php');
     $opcion = $_GET['opcion'];
 
     /* si el usuario se ha logueado tiene acceso a estas paginas */
@@ -42,11 +43,9 @@ if (isset($_GET['opcion'])) {
 
             case 'registroLibros':
                 # code... redirigir al gestionarLibros
-                include_once(__DIR__ . '/../view/registroLibros.php');
+                include_once(__DIR__ . '/../view/RegistroLibros.php');
 
                 break;
-
-
         }
     }
     /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */ else if (!isset($_SESSION['usuario'])) {
@@ -58,7 +57,6 @@ if (isset($_GET['opcion'])) {
             case 'registrarse':
                 include_once(__DIR__ . '/../view/register.php');
                 break;
-
         }
     }
 } else {
