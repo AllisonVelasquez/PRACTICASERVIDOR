@@ -29,44 +29,48 @@ class User
         return false;
     }
 
-    static function blockUser($user)
-    {
-        $users = self::getAll();
-        if (self::comprobarUser($users, $user)) {
-            if ($users[$user]['blocked'] == false) {
-                $users[$user]['blocked'] = true;
-                file_put_contents(self::$file, json_encode($users));
-                return "Usuario bloqueado con éxito";
-            }
-            return "El usuario ya estaba bloqueado";
-        }
-        return "Nombre de usuario no existe";
-    }
+    // static function blockUser($user)
+    // {
+    //     $users = self::getAll();
+    //     if (self::comprobarUser($users, $user)) {
+    //         if ($users[$user]['blocked'] == false) {
+    //             $users[$user]['blocked'] = true;
+    //             file_put_contents(self::$file, json_encode($users));
+    //             return "Usuario bloqueado con éxito";
+    //         }
+    //         return "El usuario ya estaba bloqueado";
+    //     }
+    //     return "Nombre de usuario no existe";
+    // }
 
 
-    static function unblockUser($user)
-    {
-        $users = self::getAll();
-        if (self::comprobarUser($users, $user)) {
-            if ($users[$user]['blocked'] == true) {
-                $users[$user]['blocked'] = false;
-                file_put_contents(self::$file, json_encode($users));
-                return "Usuario desbloqueado con éxito";
-            }
-            return "El usuario no estaba bloqueado";
-        }
-        return "Nombre de usuario no existe";
-    }
+    // static function unblockUser($user)
+    // {
+    //     $users = self::getAll();
+    //     if (self::comprobarUser($users, $user)) {
+    //         if ($users[$user]['blocked'] == true) {
+    //             $users[$user]['blocked'] = false;
+    //             file_put_contents(self::$file, json_encode($users));
+    //             return "Usuario desbloqueado con éxito";
+    //         }
+    //         return "El usuario no estaba bloqueado";
+    //     }
+    //     return "Nombre de usuario no existe";
+    // }
 
+
+    //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
     static function setDato($user, $campo, $valor)
     {
         $users = self::getAll();
         if (self::comprobarUser($users, $user)) {
             if ($campo == 'pass') {
                 $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+                file_put_contents(self::$file, json_encode($users));
                 return "Contraseña cambiada con éxito";
             } else {
                 $users[$user][$campo] = $valor;
+                file_put_contents(self::$file, json_encode($users));
                 return "$campo modificado con éxito";
             }
         }

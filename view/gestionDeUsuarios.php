@@ -33,9 +33,9 @@ En ese ternario comprobamos el estado del usuario, y si es el que corresponde se
             <form action="../controller/controllerUsuarios.php" method="GET">
                 <input type="hidden" name="user" value="<?php echo $key; ?>">
                 <select name="blocked" onchange="this.form.submit()" style="color: <?php echo ($value['blocked']) ? 'red' : 'green'; ?>">
-                    <option value="0" <?php echo ($value['blocked']) ? 'selected' : ''; ?> style="color: red;">Bloqueado</option>
+                    <option value="1" <?php echo ($value['blocked']) ? 'selected' : ''; ?> style="color: red;">Bloqueado</option>
 
-                    <option value="1" <?php echo (!$value['blocked']) ? 'selected' : ''; ?> style="color: green;">Activo</option>
+                    <option value="0" <?php echo (!$value['blocked']) ? 'selected' : ''; ?> style="color: green;">Activo</option>
                 </select>
             </form>
         </td>

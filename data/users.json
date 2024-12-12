@@ -3,19 +3,19 @@
         "nombre": "joel",
         "pass": "$2y$10$u\/8fY6f8ywfHGBam.aTcDOuICy.0ODC0uneAGfkM87\/u2gcymLmvq",
         "correo": "joel@gmail.com",
-        "admin": true,
+        "admin": false,
         "blocked": true
     },
     "Juan": {
         "nombre": "Juan",
         "pass": "$2y$10$KD2WWoWxV4ekTzq9DrLy\/ONSZeaGqP5mPwBjxOhlsaM0RMPc0dAgu",
         "correo": "Juan@gmail.com",
-        "admin": false,
-        "blocked": true
+        "admin": true,
+        "blocked": false
     },
     "allis": {
         "nombre": "allis",
-        "pass": "$2y$10$zp1dAHvFJXWNkBfiAEq3QuRkR.yfta7mtFV.a14NTnvgrMwy7YmD6",
+        "pass": "$2y$10$OfEJrocLFA1jMb4jnfaUXuHtTwXFrDwZ5r\/QSzBzd78PpZ6EwW.Um",
         "correo": "allis@gmail.com",
         "admin": true,
         "blocked": false
