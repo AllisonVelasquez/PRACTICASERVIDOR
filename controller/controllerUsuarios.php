@@ -12,6 +12,6 @@ if (isset($_GET['blocked'])) {
         User::setDato($_GET['user'], 'admin', $_GET['admin']);
     
 }
-
+//hu
 // header('Location: ../controller/controllerIndex.php?opcion=gestionUsuarios');
 // exit;
