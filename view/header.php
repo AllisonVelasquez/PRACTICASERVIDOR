@@ -16,8 +16,8 @@
             <div class="container-fluid">
                 <!-- Logo o nombre del sitio -->
                 <a class="navbar-brand" href="#"><?php
-              echo  isset($_SESSION['usuario']) ? 'Bienvenido ' . $_SESSION['usuario']['nombreUsu'] : 'Biblioteca';
-                    ?></a>
+                                                    echo  isset($_SESSION['usuario']) ? 'Bienvenido ' . $_SESSION['usuario'] : 'Biblioteca';
+                                                    ?></a>
 
                 <!-- Botón para dispositivos móviles -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -33,8 +33,9 @@
                             <!-- Menú para usuarios logueados -->
                             <!-- Para el admin -->
                             <li class="nav-item">
-                                <a class="nav-link"
-                                    href="../controller/controllerIndex.php?opcion=gestionUsuarios">Gestionar Usuarios</a>
+                                <?php if ($_SESSION['admin']) : ?>
+                                    <a class="nav-link"
+                                        href="../controller/controllerIndex.php?opcion=gestionUsuarios">Gestionar Usuarios</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../controller/controllerIndex.php?opcion=verPrestamos">Ver
@@ -44,42 +45,43 @@
                                 <a class="nav-link" href="../controller/controllerIndex.php?opcion=registroLibros">Registro
                                     Libros</a>
                             </li>
-                            <!-- Para el resto de Usuarios -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="../controller/controllerIndex.php?opcion=misPrestamos">Mis
-                                    Prestamos </a>
-                            </li>
+                        <?php endif; ?>
+                        <!-- Para el resto de Usuarios -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controller/controllerIndex.php?opcion=misPrestamos">Mis
+                                Prestamos </a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="../controller/controllerIndex.php?opcion=logOut">Cerrar Sesión</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controller/controllerIndex.php?opcion=logOut">Cerrar Sesión</a>
+                        </li>
 
                         <?php } else if (isset($_GET['opcion']) && (($_GET['opcion'] === 'logIn') || ($_GET['opcion'] === 'registrarse'))) {
                             if (($_GET['opcion'] === 'logIn')) { ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link"
-                                            href="../controller/controllerIndex.php?opcion=registrarse">Registrarse</a>
-                                    </li>
-                            <?php }
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="../controller/controllerIndex.php?opcion=registrarse">Registrarse</a>
+                            </li>
+                        <?php }
                             if (($_GET['opcion'] === 'registrarse')) { ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesión</a>
-                                    </li>
-                            <?php } ?>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../controller/controllerIndex.php">Inicio</a>
-                                </li>
-
-                        <?php } else { ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesión</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="../controller/controllerIndex.php?opcion=registrarse">Registrarme</a>
-                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesión</a>
+                            </li>
                         <?php } ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controller/controllerIndex.php">Inicio</a>
+                        </li>
+
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="../controller/controllerIndex.php?opcion=registrarse">Registrarme</a>
+                        </li>
+                    <?php } ?>
 
 
                     </ul>

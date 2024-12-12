@@ -22,8 +22,12 @@ if (isset($_POST['registrarse'])) {
         exit;
     } else {
         require(__DIR__ . '/../model/User.php');
+        if(empty(User::getAll())){
+        User::createUser($nombreUsuario, $nombre, $password1, $email,true);
+     }else{
         User::createUser($nombreUsuario, $nombre, $password1, $email);
-        echo 'Usuario creado';
+    }
+    echo 'Usuario creado';
         echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar sesion</a>';
     }
 

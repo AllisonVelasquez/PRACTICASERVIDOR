@@ -1,15 +1,14 @@
 <?php
-session_start();
-
+require('../cargador.php');
 if (isset($_GET['opcion'])) {
+    session_start();
+
     require(__DIR__ . '/../view/header.php');
-    require_once(__DIR__ . '/../model/Book.php');
     $opcion = $_GET['opcion'];
 
     /* si el usuario se ha logueado tiene acceso a estas paginas */
     if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-        require(__DIR__ . '/../model/Checkout.php');
-        require_once(__DIR__ . '/../model/User.php');
+
 
         switch ($opcion) {
             case 'logOut':
@@ -29,23 +28,29 @@ if (isset($_GET['opcion'])) {
                 # code... redirigir al misPrestamos
                 include_once(__DIR__ . '/../view/misPrestamos.php');
                 break;
-            case 'gestionUsuarios':
-                $users = User::getAll();
-                # code... redirigir al gestionUsuarios
-                include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
-                break;
-            case 'verPrestamos':
-                # code... redirigir al gestionarUsuarios
-                $prestamos = Checkout::getAll();
-                # code... redirigir al misPrestamos
-                include_once(__DIR__ . '/../view/verPrestamos.php');
-                break;
+           
+        }
+        if($_SESSION['admin']===true){
+            switch ($opcion) {
+                case 'gestionUsuarios':
+                    $users = User::getAll();
+                    # code... redirigir al gestionUsuarios
+                    include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
+                    break;
+                case 'verPrestamos':
+                    # code... redirigir al gestionarUsuarios
+                    $prestamos = Checkout::getAll();
+                    # code... redirigir al misPrestamos
+                    include_once(__DIR__ . '/../view/verPrestamos.php');
+                    break;
+    
+                case 'registroLibros':
+                    # code... redirigir al gestionarLibros
+                    include_once(__DIR__ . '/../view/RegistroLibros.php');
+    
+                    break;
+            }
 
-            case 'registroLibros':
-                # code... redirigir al gestionarLibros
-                include_once(__DIR__ . '/../view/RegistroLibros.php');
-
-                break;
         }
     }
     /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */ else if (!isset($_SESSION['usuario'])) {
@@ -60,7 +65,8 @@ if (isset($_GET['opcion'])) {
         }
     }
 } else {
-    $books = Book::getAll();
+    require(__DIR__ . '/../view/header.php');
+
     include_once(__DIR__ . '/../view/libros.php');
 }
 

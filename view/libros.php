@@ -3,6 +3,7 @@
 
     <?php
     // Extrae opciones únicas para los selects
+    $books=Book::getAll();
     $nombres = array_unique(array_column($books, 'nombre'));
     $autores = array_unique(array_column($books, 'autor'));
     $generos = array_unique(array_column($books, 'genero'));
