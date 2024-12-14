@@ -90,6 +90,8 @@
                                 <?php
                                 if (isset($_SESSION['usuario'] )&& !empty($_SESSION['usuario'])) {
                                     echo '<a href="../controller/controllerIndex.php?prestar='.$key.'">Sacar libro</a>';
+                                } else {
+                                echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesion</a>';
                                 }
                                 ?>
                             </div>

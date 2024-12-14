@@ -33,6 +33,9 @@ if (isset($_GET['opcion'])) {
                 # code... redirigir al misPrestamos
                 include_once(__DIR__ . '/../view/misPrestamos.php');
                 break;
+            case 'zonaRestringida':
+                include_once(__DIR__ . '/../view/zonaRestringida.php');
+                break;
 
         }
         if ($_SESSION['admin'] === true) {
@@ -47,7 +50,7 @@ if (isset($_GET['opcion'])) {
                         if (isset($_POST['dias'])) {
                             Checkout::addDays($_POST['prestamo'], $_POST['dias']);
                         } else if (isset($_POST['devuelto'])) {
-                            Checkout::returnCheckout($_POST['prestamo'],boolval($_POST['devuelto']));
+                            Checkout::returnCheckout($_POST['prestamo'], boolval($_POST['devuelto']));
                         }
                     }
                     $prestamos = Checkout::getAll();
@@ -74,6 +77,9 @@ if (isset($_GET['opcion'])) {
             case 'registrarse':
                 include_once(__DIR__ . '/../view/register.php');
                 break;
+            case 'zonaRestringida':
+                include_once(__DIR__ . '/../view/zonaRestringida.php');
+                break;
         }
     }
 } else {
@@ -81,11 +87,11 @@ if (isset($_GET['opcion'])) {
 
     include_once(__DIR__ . '/../view/libros.php');
 }
-
+//la opcion de prestar solo aparece cuando el usuario esta logueado 
 if (isset($_GET['prestar'])) {
     require_once(__DIR__ . '/../model/Checkout.php');
 
-    Checkout::createCheckout($_SESSION['usuario']['nombreUsu'], $_GET['prestar']);
+    Checkout::createCheckout($_SESSION['usuario'], $_GET['prestar']);
     header('Location: ./controllerIndex.php?opcion=misLibros');
     exit;
 }

@@ -131,6 +131,6 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
             </table>
         </div>
     </div>
-<?php }
-header('Location:../controller/controllerIndex.php');
-?>
+<?php }else{
+header('Location:../controller/controllerIndex.php?opcion=zonaRestringida');
+}?>
