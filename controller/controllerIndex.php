@@ -24,6 +24,11 @@ if (isset($_GET['opcion'])) {
                 break;
 
             case 'misPrestamos':
+                if (isset($_POST['usuario']) && ($_SESSION['admin']===true)) {
+                    $usuario = $_POST['usuario'];
+                } else {
+                    $usuario = $_SESSION['usuario'];
+                }
                 $prestamos = Checkout::getAll();
                 # code... redirigir al misPrestamos
                 include_once(__DIR__ . '/../view/misPrestamos.php');

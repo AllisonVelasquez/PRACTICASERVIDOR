@@ -1,7 +1,7 @@
 
 
 <div class="container my-4">
-    <h2 class="mb-4">Listado de Préstamos</h2>
+    <h2 class="mb-4">Listado de Préstamos de <?php echo $usuario; ?> </h2>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
             <tr>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
            <?php foreach ($prestamos as $prestamo) { 
-            if($prestamo['idUser']===$_SESSION['usuario']['nombreUsu']){?>
+            if($prestamo['idUser']===$usuario){?>
                 <tr>
                     <td><?php echo Book::getDato($prestamo['idBook'],'nombre'); ?></td>
                     <td><?php echo date("d-m-Y", $prestamo['dateP']); ?></td>
