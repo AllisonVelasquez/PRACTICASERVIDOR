@@ -29,8 +29,10 @@ class Checkout
     {
         $prestamos = self::getAll();
         if (self::comprobarCheckout($id)) {
-            $prestamos[$id]['dateD'] += ($cantidadDias * 86400);
+            $prestamos[$id]['dateD'] += $cantidadDias * 86400;
         }
+        file_put_contents(filename: self::$file, data: json_encode($prestamos));
+
     }
 
     static function getCheckout($id)
@@ -55,12 +57,17 @@ class Checkout
         return array_key_exists($id, $prestamos);
     }
 
-    static function returnCheckout($id)
+    static function returnCheckout($id,$valor)
     {
         $prestamos = self::getAll();
         if (self::comprobarCheckout($id)) {
-            $prestamos[$id]['devuelto'] = true;
+            // modifica la fecha al momento en que se devuelve el libro
+            $prestamos[$id]['dateD'] = time();
+            
+            $prestamos[$id]['devuelto'] = $valor;
             Book::devuelto($id);
+            file_put_contents(filename: self::$file, data: json_encode($prestamos));
+
             return "Libro devuelto";
         }
         return "El préstamo $id no existe";

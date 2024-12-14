@@ -24,7 +24,7 @@ if (isset($_GET['opcion'])) {
                 break;
 
             case 'misPrestamos':
-                if (isset($_POST['usuario']) && ($_SESSION['admin']===true)) {
+                if (isset($_POST['usuario']) && ($_SESSION['admin'] === true)) {
                     $usuario = $_POST['usuario'];
                 } else {
                     $usuario = $_SESSION['usuario'];
@@ -33,9 +33,9 @@ if (isset($_GET['opcion'])) {
                 # code... redirigir al misPrestamos
                 include_once(__DIR__ . '/../view/misPrestamos.php');
                 break;
-           
+
         }
-        if($_SESSION['admin']===true){
+        if ($_SESSION['admin'] === true) {
             switch ($opcion) {
                 case 'gestionUsuarios':
                     $users = User::getAll();
@@ -43,16 +43,23 @@ if (isset($_GET['opcion'])) {
                     include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
                     break;
                 case 'verPrestamos':
-                    # code... redirigir al gestionarUsuarios
+                    if (isset($_POST['prestamo'])) {
+                        if (isset($_POST['dias'])) {
+                            Checkout::addDays($_POST['prestamo'], $_POST['dias']);
+                        } else if (isset($_POST['devuelto'])) {
+                            Checkout::returnCheckout($_POST['prestamo'],boolval($_POST['devuelto']));
+                        }
+                    }
                     $prestamos = Checkout::getAll();
+
                     # code... redirigir al misPrestamos
                     include_once(__DIR__ . '/../view/verPrestamos.php');
                     break;
-    
+
                 case 'registroLibros':
                     # code... redirigir al gestionarLibros
                     include_once(__DIR__ . '/../view/RegistroLibros.php');
-    
+
                     break;
             }
 

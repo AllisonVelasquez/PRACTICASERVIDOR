@@ -79,7 +79,7 @@ class Book
     {
         $libros = self::getAll();
         if (self::comprobarBook($id)) {
-            $libros[$id]['cant'] += 1;
+            $libros[$id]['cantidad'] += 1;
             file_put_contents(self::$file, json_encode($libros));
             return true;
         }

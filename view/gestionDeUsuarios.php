@@ -19,6 +19,11 @@ foreach ($users as $key => $value) { ?>
         <td><?php echo $value['nombre']; ?></td>
         <td><?php echo $value['correo']; ?></td>
         <td>
+                      <!-- A continuación tenemos dos formularios para la columna Admin y Bloqueado
+Se pasa por un campo hidden el nombre Usuario. Para mostrar si un usuario es admin o no, o si esta bloqueado o no, se hace un ternario en cada opción
+En ese ternario comprobamos el estado del usuario, y si es el que corresponde se marca la opcion como selected para que ese sea el texto que aparezca en el desplegable
+
+-->
             <!-- Formulario para el campo "Admin" -->
             <form action="../controller/controllerUsuarios.php" method="GET">
                 <input type="hidden" name="user" value="<?php echo $key; ?>">

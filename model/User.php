@@ -58,10 +58,8 @@ class User
     //     return "Nombre de usuario no existe";
     // }
 
-
     //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
-    static function setDato($user, $campo, $valor)
-    {
+    static function setDato($user, $campo, $valor) {
         $users = self::getAll();
         if (self::comprobarUser($users, $user)) {
             if ($campo == 'pass') {
@@ -111,4 +109,7 @@ class User
         return "Usuario no existe";
     }
 }
-User::createUser('allis', 'allis', 'allis', 'allis@gmail.com', true);
+//Crea un Admin
+
+/* User::createUser('allis', 'allis', 'allis', 'allis@gmail.com', true);
+ */
