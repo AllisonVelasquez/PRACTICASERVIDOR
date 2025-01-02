@@ -3,7 +3,7 @@ class Book
 {
     private static $file = __DIR__ . '/../data/books.json';
 
-    static function createBook($nombre, $cant, $autor, $gen, $desc, $url)
+    static function createBook($nombre, $cant, $autor, $gen, $desc, $url, $habilidado = true)
     {
         $libros = self::getAll();
 
@@ -11,10 +11,11 @@ class Book
 
         $libros[$id] = [
             'nombre' => $nombre,
-            'cant' => $cant,
+            'cantidad' => $cant,
+            'cantidadTotal' => $cant,
             'autor' => $autor,
-            'gen' => $gen,
-            'desc' => $desc,
+            'genero' => $gen,
+            'descripcion' => $desc,
             'url' => $url
         ];
 
@@ -42,10 +43,12 @@ class Book
     static function delBook($id)
     {
         $libros = self::getAll();
-        if (self::comprobarBook($id)) {
-            unset($libros[$id]);
-            file_put_contents(self::$file, json_encode($libros));
-            return true;
+        if (self::getDato($id, 'cantidad') === self::getDato($id, 'cantidadTotal')) {
+            if (self::comprobarBook($id)) {
+                unset($libros[$id]);
+                file_put_contents(self::$file, json_encode($libros));
+                return true;
+            }
         }
         return false;
     }
