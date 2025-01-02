@@ -2,7 +2,6 @@
     <h1 class="text-center mb-4">Filtrar Libros</h1>
 
     <?php
-    // Extrae opciones únicas para los selects
     $books=Book::getAll();
     $nombres = array_unique(array_column($books, 'nombre'));
     $autores = array_unique(array_column($books, 'autor'));
