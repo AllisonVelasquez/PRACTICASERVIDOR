@@ -80,7 +80,7 @@
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="card h-100">
                             <div class="ratio " style="--bs-aspect-ratio: 160%;">
-                                <img src="<?php echo $book['url']; ?>" class="img-fluid rounded" alt="Imagen del libro">
+                                <img src="<?php echo '../img/'.$book['url']; ?>" class="img-fluid rounded" alt="Imagen del libro">
                             </div>
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <p class="card-text"><strong>Autor:</strong> <?php echo $book['autor']; ?></p>

@@ -68,8 +68,7 @@ if (isset($_GET['opcion'])) {
 
         }
     }
-    /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */
-     else if (!isset($_SESSION['usuario'])) {
+    /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */ else if (!isset($_SESSION['usuario'])) {
         switch ($opcion) {
             case 'logIn':
                 include_once(__DIR__ . '/../controller/controllerLogIn.php');
@@ -78,7 +77,7 @@ if (isset($_GET['opcion'])) {
             case 'registrarse':
                 include_once(__DIR__ . '/../view/register.php');
                 break;
-            default:
+            case 'zonaRestringida':
                 include_once(__DIR__ . '/../view/zonaRestringida.php');
                 break;
         }

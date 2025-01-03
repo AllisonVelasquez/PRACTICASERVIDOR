@@ -49,6 +49,10 @@ class Book
                 file_put_contents(self::$file, json_encode($libros));
                 return true;
             }
+
+        } else {
+            $libros[$id]['habilitado'] = false;
+            file_put_contents(self::$file, json_encode($libros));
         }
         return false;
     }
@@ -71,7 +75,7 @@ class Book
     {
         $libros = self::getAll();
         if (self::comprobarBook($id)) {
-            $libros[$id]['cant'] -= 1;
+            $libros[$id]['cantidad'] -= 1;
             file_put_contents(self::$file, json_encode($libros));
             return true;
         }
@@ -84,6 +88,9 @@ class Book
         if (self::comprobarBook($id)) {
             $libros[$id]['cantidad'] += 1;
             file_put_contents(self::$file, json_encode($libros));
+            if ($libros[$id]['hablitado'] === false) {
+                self::delBook($id);
+            }
             return true;
         }
         return false;

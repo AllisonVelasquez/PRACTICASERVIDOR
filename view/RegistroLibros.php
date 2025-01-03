@@ -1,7 +1,7 @@
     <div class="container my-5">
         <h1 class="text-center mb-4">Ingreso de Libro</h1>
 
-        <form method="POST" action='./../controller/controllerRegistroLibros.php' enctype="multipart/form-data">
+        <form method="POST" action='./../controller/controllerRegistroLibros.php?accion=add' enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre del Libro</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
