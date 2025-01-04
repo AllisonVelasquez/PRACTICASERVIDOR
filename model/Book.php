@@ -31,8 +31,13 @@ class Book
         }
         return "No hay ningún libro con el id $id";
     }
-
-    static function getDato($id, $campo)
+    static function getBook($id)
+    {
+        $libros = self::getAll();
+        if (self::comprobarBook($id))
+            return $libros[$id];
+        return "No hay ningún libro con el id $id";
+    }    static function getDato($id, $campo)
     {
         $libros = self::getAll();
         if (self::comprobarBook($id))

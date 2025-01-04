@@ -1,5 +1,5 @@
-<form action="../controller/controllerLogIn.php" method="post" class="p-4 border bg-primary rounded shadow-sm">
-  <div class="mb-3 bg-danger">
+<form action="../controller/controllerLogIn.php" method="post" class="p-4 border bg-success-subtle rounded shadow-sm">
+  <div class="mb-3">
     <label for="nombre" class="form-label">Nombre Usuario</label>
     <input type="text" name="nombre" id="nombre" class="form-control" required>
   </div>

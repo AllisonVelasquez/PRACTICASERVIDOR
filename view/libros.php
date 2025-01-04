@@ -91,10 +91,10 @@
                                 <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                                 <?php
                                 if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-                                    echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Sacar libro</a>';
+                                    echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Modificar</a></button>';
                                     if (isset($_SESSION['admin'])) {
-                                        echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Modificar</a>';
-                                        echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Eliminar</a>';
+                                        echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $key . ' ">Modificar</a></button>';
+                                        echo '<button class="bg-primary"><a href="../controller/controllerRegistroLibros.php?accion=modificar&&id=' . $key . ' ">Modificar</a></button>';
                                     }
                                 } else {
                                     echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesion</a>';
