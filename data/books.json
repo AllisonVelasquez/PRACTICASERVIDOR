@@ -1,7 +1,7 @@
 {
     "1": {
         "nombre": "Cien a\u00f1os de soledad",
-        "cantidad": 31,
+        "cantidad": 23,
         "cantidadTotal": 31,
         "autor": "Gabriel Garc\u00eda M\u00e1rquez",
         "genero": "Realismo m\u00e1gico",
@@ -118,12 +118,12 @@
     },
     "14": {
         "nombre": "Juanaa",
-        "cantidad": "2",
+        "cantidad": 1,
         "cantidadTotal": "2",
         "autor": "dad",
         "genero": "daaa",
         "descripcion": "addaadd",
-        "url": ".\\\/..\\\/img\\\/Juanaa.jpg"
+        "url": "..\\\/img\\\/Juanaa.jpg"
     },
     "15": {
         "nombre": "sdsdsdsddsdss",

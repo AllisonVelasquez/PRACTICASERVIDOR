@@ -2,7 +2,7 @@
     <h1 class="text-center mb-4">Filtrar Libros</h1>
 
     <?php
-    $books=Book::getAll();
+    $books = Book::getAll();
     $nombres = array_unique(array_column($books, 'nombre'));
     $autores = array_unique(array_column($books, 'autor'));
     $generos = array_unique(array_column($books, 'genero'));
@@ -76,21 +76,28 @@
     if (!empty($filteredBooks)) { ?>
         <div class="container my-4">
             <div class="row g-4">
-                <?php foreach ($filteredBooks as $key =>  $book) { ?>
+                <?php foreach ($filteredBooks as $key => $book) { ?>
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="card h-100">
                             <div class="ratio " style="--bs-aspect-ratio: 160%;">
-                                <img src="<?php echo '../img/'.$book['url']; ?>" class="img-fluid rounded" alt="Imagen del libro">
+                                <img src="<?php echo '../img/' . $book['url']; ?>" class="img-fluid rounded"
+                                    alt="Imagen del libro">
                             </div>
                             <div class="card-body d-flex flex-column justify-content-between">
+                                <p class="card-text"><strong>Titulo:</strong> <?php echo $book['nombre']; ?></p>
+
                                 <p class="card-text"><strong>Autor:</strong> <?php echo $book['autor']; ?></p>
                                 <p class="card-text"><strong>Género:</strong> <?php echo $book['genero']; ?></p>
                                 <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                                 <?php
-                                if (isset($_SESSION['usuario'] )&& !empty($_SESSION['usuario'])) {
-                                    echo '<a href="../controller/controllerIndex.php?prestar='.$key.'">Sacar libro</a>';
+                                if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
+                                    echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Sacar libro</a>';
+                                    if (isset($_SESSION['admin'])) {
+                                        echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Modificar</a>';
+                                        echo '<a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . '">Eliminar</a>';
+                                    }
                                 } else {
-                                echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesion</a>';
+                                    echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesion</a>';
                                 }
                                 ?>
                             </div>

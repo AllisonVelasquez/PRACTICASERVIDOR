@@ -1,7 +1,8 @@
 <?php
 require('../cargador.php');
+session_start();
+
 if (isset($_GET['opcion'])) {
-    session_start();
 
     require(__DIR__ . '/../view/header.php');
     $opcion = $_GET['opcion'];
@@ -53,6 +54,7 @@ if (isset($_GET['opcion'])) {
                             Checkout::returnCheckout($_POST['prestamo'], boolval($_POST['devuelto']));
                         }
                     }
+                    
                     $prestamos = Checkout::getAll();
 
                     # code... redirigir al misPrestamos
@@ -91,6 +93,4 @@ if (isset($_GET['opcion'])) {
 if (isset($_GET['prestar'])) {
     require_once(__DIR__ . '/../model/Checkout.php');
     Checkout::createCheckout($_SESSION['usuario'], $_GET['prestar']);
-    header('Location: ./controllerIndex.php?opcion=misLibros');
-    exit;
 }

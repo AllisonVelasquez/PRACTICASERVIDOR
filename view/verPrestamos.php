@@ -60,7 +60,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                         <option value="">Todos</option>
                         <?php foreach ($idBooks as $libroOption) { ?>
                             <option value="<?php echo $libroOption; ?>" <?php echo ($filtroLibro === $libroOption) ? 'selected' : ''; ?>>
-                                <?php echo $libroOption; ?>
+                                <?php echo Book::getDato($libroOption, 'nombre') . '(' . $libroOption. ')'; ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -87,7 +87,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     <tr>
                         <th>#</th>
                         <th>ID Usuario</th>
-                        <th>ID Libro</th>
+                        <th>ID / Nombre  Libro </th>
                         <th>Fecha de Préstamo</th>
                         <th>Fecha de Devolución</th>
                         <th>Devuelto</th>
@@ -99,7 +99,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                         <tr>
                             <td><?php echo $id; ?></td>
                             <td><?php echo $prestamo['idUser']; ?></td>
-                            <td><?php echo $prestamo['idBook']; ?></td>
+                            <td><?php echo  $prestamo['idBook']; ?></td>
                             <td><?php echo date("d-m-Y", $prestamo['dateP']); ?></td>
                             <td><?php echo date("d-m-Y", $prestamo['dateD']); ?></td>
                             <td>

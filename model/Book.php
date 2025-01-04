@@ -43,16 +43,10 @@ class Book
     static function delBook($id)
     {
         $libros = self::getAll();
-        if (self::getDato($id, 'cantidad') === self::getDato($id, 'cantidadTotal')) {
-            if (self::comprobarBook($id)) {
-                unset($libros[$id]);
-                file_put_contents(self::$file, json_encode($libros));
-                return true;
-            }
-
-        } else {
-            $libros[$id]['habilitado'] = false;
+        if (self::comprobarBook($id)) {
+            unset($libros[$id]);
             file_put_contents(self::$file, json_encode($libros));
+            return true;
         }
         return false;
     }
@@ -88,11 +82,35 @@ class Book
         if (self::comprobarBook($id)) {
             $libros[$id]['cantidad'] += 1;
             file_put_contents(self::$file, json_encode($libros));
-            if ($libros[$id]['hablitado'] === false) {
-                self::delBook($id);
-            }
             return true;
         }
         return false;
     }
+    static function deshabilitar($id)
+    {
+        $libros = self::getAll();
+        if (self::comprobarBook($id)) {
+            if ($libros[$id]['hablitado'] === true) {
+                $libros[$id]['habilidato'] = false;
+                file_put_contents(self::$file, json_encode($libros));
+                return true;
+
+            }
+        }
+        return false;
+    }
+    static function habilitar($id)
+    {
+        $libros = self::getAll();
+        if (self::comprobarBook($id)) {
+            if ($libros[$id]['hablitado'] === false) {
+                $libros[$id]['habilidato'] = true;
+                file_put_contents(self::$file, json_encode($libros));
+                return true;
+
+            }
+        }
+        return false;
+    }
+
 }

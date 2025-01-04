@@ -17,7 +17,7 @@
         <nav  style="background-color:rgb(147, 99, 236);"class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <!-- Logo o nombre del sitio -->
-                <a class="navbar-brand bi bi-house" href="../controller/controllerIndex.php"><?php
+                <a class="navbar-brand bi bi-house" href="../controller/controllerIndex.php?opcion=libros"><?php
                 echo isset($_SESSION['usuario']) ? 'Bienvenido ' . $_SESSION['usuario'] : 'Biblioteca';
                 ?></a>
 
@@ -41,8 +41,7 @@
                                         href="../controller/controllerIndex.php?opcion=gestionUsuarios">Gestionar Usuarios</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../controller/controllerIndex.php?opcion=verPrestamos">Ver
-                                        Prestamos</a>
+                                    <a class="nav-link" href="../controller/controllerIndex.php?opcion=verPrestamos">Gestionar prestamos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="../controller/controllerIndex.php?opcion=registroLibros">Registrar
