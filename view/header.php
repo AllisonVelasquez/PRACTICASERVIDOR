@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 <!-- Logo o nombre del sitio -->
                 <a class="navbar-brand bi bi-house" href="../controller/controllerIndex.php?opcion=libros"><?php
-                echo isset($_SESSION['usuario']) ? 'Bienvenido ' . $_SESSION['usuario'] : 'Biblioteca';
+                echo isset($_SESSION['usuario']) ? '  Bienvenido ' . $_SESSION['usuario'] : '  Biblioteca';
                 ?></a>
 
                 <!-- Botón para dispositivos móviles -->
