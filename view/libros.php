@@ -66,7 +66,11 @@
 
     <hr>
 
+
     <?php
+    if (isset($mensaje)) {
+        echo '<h4>' . $mensaje . '</h4>';
+    }
     // Obtiene los valores seleccionados del formulario
     $nombre = $_POST['nombre'] ?? '';
     $autor = $_POST['autor'] ?? '';

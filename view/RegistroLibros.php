@@ -1,6 +1,6 @@
 <div class="container my-5">
     <?php if (!isset($modificar)) { ?>
-            <h1 class="text-center mb-4">Registro de Libro</h1>
+        <h1 class="text-center mb-4">Registro de Libro</h1>
 
         <form method="POST" action='./../controller/controllerRegistroLibros.php?accion=add' enctype="multipart/form-data">
             <div class="mb-3">
@@ -34,13 +34,13 @@
 
             <input type="submit" name="addLibro" class="btn btn-primary" value="Guardar Libro">
         </form>
-    <?php } else if (isset($modificar)) {?>      
+    <?php } else if (isset($modificar)) { ?>
             <h1 class="text-center mb-4">Modificar Libro</h1>
 
-              <form method="POST" action='./../controller/controllerRegistroLibros.php?accion=modificar'
+            <form method="POST" action='./../controller/controllerRegistroLibros.php?accion=modificar'
                 enctype="multipart/form-data">
 
-                <input type="hidden" name="id" id="id" value="<?php echo $_GET['id'] ; ?>">
+                <input type="hidden" name="id" id="id" value="<?php echo $_GET['id']; ?>">
 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre del Libro</label>
