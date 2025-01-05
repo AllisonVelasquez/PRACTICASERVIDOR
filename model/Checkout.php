@@ -19,13 +19,14 @@ class Checkout
             'dateP' => time(),
             'dateD' => time() + 1296000,
             'devuelto' => false,
+            'solicitudAmpliacion' => false,
             Book::prestado($idBook)
 
         ];
         file_put_contents(self::$file, json_encode($prestamos));
     }
 
-    static function addDays($id, $cantidadDias)
+    static function addDays($id, $cantidadDias=7)
     {
         $prestamos = self::getAll();
         if (self::comprobarCheckout($id)) {
@@ -71,6 +72,18 @@ class Checkout
             return "Libro devuelto";
         }
         return "El préstamo $id no existe";
+    }
+
+    static function ampliar($id){
+        $prestamos = self::getAll();
+        if (self::comprobarCheckout($id)) {
+            if($prestamos[$id]['solicitudAmpliacion'] == false){
+                $prestamos[$id]['solicitudAmpliacion'] = true;
+            file_put_contents(self::$file, json_encode($prestamos));
+            return true;
+            }
+            return false;
+        }
     }
 }
 
