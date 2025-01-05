@@ -54,7 +54,7 @@ if (isset($_GET['opcion'])) {
                             Checkout::returnCheckout($_POST['prestamo'], boolval($_POST['devuelto']));
                         }
                     }
-                    
+
                     $prestamos = Checkout::getAll();
 
                     # code... redirigir al misPrestamos
@@ -64,6 +64,11 @@ if (isset($_GET['opcion'])) {
                 case 'registroLibros':
                     # code... redirigir al gestionarLibros
                     include_once(__DIR__ . '/../view/RegistroLibros.php');
+
+                    break;
+                case 'libros':
+                    # code... redirigir al libros
+                    include_once(__DIR__ . '/../view/libros.php');
 
                     break;
             }
