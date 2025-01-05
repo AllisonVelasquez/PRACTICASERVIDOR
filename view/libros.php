@@ -20,8 +20,6 @@
             <div class="col-md-4">
                 <label for="nombre" class="form-label">Nombre del libro:</label>
                 <select name="nombre" id="nombre" class="form-select">
-
-                    <!--Aqui hayq eu dejar que la opcion de filtro permanezca y añadir un boton de quitar filtros-->
                     <option value="">Todos
                         <?php ?>
                     </option>
@@ -102,7 +100,9 @@
                                 <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                                 <?php
                                 if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-                                    echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Sacar Prestado</a></button>';
+                                    echo '<a class="btn btn-success" href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' " role="button">Solicitar Prestamo</a>';
+                                    //echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Solicitar préstamo </a></button>';
+
                                     if ($_SESSION['admin'] === true) {
                                         echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $key . ' ">Eliminar</a></button>';
                                         echo '<button class="bg-primary"><a href="../controller/controllerRegistroLibros.php?accion=modificar&&id=' . $key . ' ">Modificar</a></button>';

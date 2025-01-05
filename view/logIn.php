@@ -1,4 +1,8 @@
 <form action="../controller/controllerLogIn.php" method="post" class="p-4 border bg-success-subtle rounded shadow-sm">
+  <?php
+  if(isset($resultadoLogin) && ($resultadoLogin != true))
+  echo '<p style="color: red;"><strong>'. $resultadoLogin . '</strong></p>';
+  ?>
   <div class="mb-3">
     <label for="nombre" class="form-label">Nombre Usuario</label>
     <input type="text" name="nombre" id="nombre" class="form-control" required>

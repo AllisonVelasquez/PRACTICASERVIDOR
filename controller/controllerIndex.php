@@ -13,7 +13,7 @@ if (isset($_GET['opcion'])) {
 
         switch ($opcion) {
             case 'logOut':
-                //elimina la cookie del usuario y redirige al login
+                //elimina la cookie del usuario y redirige al login    DONDE ESTA ESTA COOKIE????
                 setcookie('preferencias', '', time() - 10000);
                 include_once(__DIR__ . '/../view/logOut.php');
                 break;
@@ -88,7 +88,7 @@ if (isset($_GET['opcion'])) {
             case 'zonaRestringida':
                 include_once(__DIR__ . '/../view/zonaRestringida.php');
                 break;
-                
+
             case 'libros':
                 include_once(__DIR__ . '/../view/libros.php');
                 break;

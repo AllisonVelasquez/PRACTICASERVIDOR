@@ -31,7 +31,7 @@ class Checkout
         if (self::comprobarCheckout($id)) {
             $prestamos[$id]['dateD'] += $cantidadDias * 86400;
         }
-        file_put_contents(filename: self::$file, data: json_encode($prestamos));
+        file_put_contents(self::$file, json_encode($prestamos));
 
     }
 
@@ -66,7 +66,7 @@ class Checkout
             
             $prestamos[$id]['devuelto'] = $valor;
             Book::devuelto($id);
-            file_put_contents(filename: self::$file, data: json_encode($prestamos));
+            file_put_contents(self::$file, json_encode($prestamos));
 
             return "Libro devuelto";
         }
