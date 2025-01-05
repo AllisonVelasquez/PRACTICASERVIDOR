@@ -21,7 +21,6 @@ if (isset($_GET['opcion'])) {
             case 'libros':
                 # code... redirigir al libros
                 include_once(__DIR__ . '/../view/libros.php');
-
                 break;
 
             case 'misPrestamos':
@@ -34,6 +33,7 @@ if (isset($_GET['opcion'])) {
                 # code... redirigir al misPrestamos
                 include_once(__DIR__ . '/../view/misPrestamos.php');
                 break;
+
             case 'zonaRestringida':
                 include_once(__DIR__ . '/../view/zonaRestringida.php');
                 break;
@@ -46,6 +46,7 @@ if (isset($_GET['opcion'])) {
                     # code... redirigir al gestionUsuarios
                     include_once(__DIR__ . '/../view/gestionDeUsuarios.php');
                     break;
+
                 case 'verPrestamos':
                     if (isset($_POST['prestamo'])) {
                         if (isset($_POST['dias'])) {
@@ -64,12 +65,11 @@ if (isset($_GET['opcion'])) {
                 case 'registroLibros':
                     # code... redirigir al gestionarLibros
                     include_once(__DIR__ . '/../view/RegistroLibros.php');
-
                     break;
+
                 case 'libros':
                     # code... redirigir al libros
                     include_once(__DIR__ . '/../view/libros.php');
-
                     break;
             }
 
@@ -84,8 +84,13 @@ if (isset($_GET['opcion'])) {
             case 'registrarse':
                 include_once(__DIR__ . '/../view/register.php');
                 break;
+
             case 'zonaRestringida':
                 include_once(__DIR__ . '/../view/zonaRestringida.php');
+                break;
+                
+            case 'libros':
+                include_once(__DIR__ . '/../view/libros.php');
                 break;
         }
     }
