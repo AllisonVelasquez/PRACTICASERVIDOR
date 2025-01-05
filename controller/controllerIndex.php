@@ -90,7 +90,4 @@ if (isset($_GET['opcion'])) {
     include_once(__DIR__ . '/../view/libros.php');
 }
 //la opcion de prestar solo aparece cuando el usuario esta logueado 
-if (isset($_GET['prestar'])) {
-    require_once(__DIR__ . '/../model/Checkout.php');
-    Checkout::createCheckout($_SESSION['usuario'], $_GET['prestar']);
-}
+

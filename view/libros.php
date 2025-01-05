@@ -2,6 +2,11 @@
     <h1 class="text-center mb-4">Filtrar Libros</h1>
 
     <?php
+    if (isset($_POST['reestablecer'])) {
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
+
     $books = Book::getAll();
     $nombres = array_unique(array_column($books, 'nombre'));
     $autores = array_unique(array_column($books, 'autor'));
@@ -54,7 +59,9 @@
                 </select>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+        <input type="submit" name="filtrar" class="btn btn-primary mt-3" value="Filtrar">
+        <input type="submit" name="reestablecer" class="btn btn-primary mt-3" value="Reestablecer">
+
     </form>
 
     <hr>
@@ -79,7 +86,7 @@
                 <?php foreach ($filteredBooks as $key => $book) { ?>
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="card h-100">
-                            <div class="ratio " style="--bs-aspect-ratio: 160%;">
+                            <div class="ratio " style="--bs-aspect-ratio: 120%;">
                                 <img src="<?php echo '../img/' . $book['url']; ?>" class="img-fluid rounded"
                                     alt="Imagen del libro">
                             </div>
@@ -91,9 +98,9 @@
                                 <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                                 <?php
                                 if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-                                    echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Modificar</a></button>';
-                                    if (isset($_SESSION['admin'])) {
-                                        echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $key . ' ">Modificar</a></button>';
+                                    echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Sacar Prestado</a></button>';
+                                    if ($_SESSION['admin'] === true) {
+                                        echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $key . ' ">Eliminar</a></button>';
                                         echo '<button class="bg-primary"><a href="../controller/controllerRegistroLibros.php?accion=modificar&&id=' . $key . ' ">Modificar</a></button>';
                                     }
                                 } else {

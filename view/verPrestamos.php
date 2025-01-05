@@ -13,7 +13,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
             // Lógica de filtrado
             $filtroUsuario = $_POST['filtro_usuario'] ?? '';
             $filtroLibro = $_POST['filtro_libro'] ?? '';
-            $filtroDevuelto = $_POST['filtro_devuelto'] ?? '';
+            $devuelto = $_POST['filtro_devuelto'] ?? '';
 
             // Aplicar el filtro en la lista de préstamos (código de filtrado)
         } elseif ($accion === 'restablecer') {
@@ -21,18 +21,18 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
             // Aquí puedes limpiar los valores del filtro o redirigir al formulario en blanco
             $filtroUsuario = '';
             $filtroLibro = '';
-            $filtroDevuelto = '';
+            $devuelto = '';
         }
     } else {
         $filtroUsuario = $_POST['filtro_usuario'] ?? '';
         $filtroLibro = $_POST['filtro_libro'] ?? '';
-        $filtroDevuelto = $_POST['filtro_devuelto'] ?? '';
+        $devuelto = $_POST['filtro_devuelto'] ?? '';
     }
     // Filtra los préstamos según los valores seleccionados
-    $prestamosFiltrados = array_filter($prestamos, function ($prestamo) use ($filtroUsuario, $filtroLibro, $filtroDevuelto) {
+    $prestado = array_filter($prestamos, function ($prestamo) use ($filtroUsuario, $filtroLibro, $devuelto) {
         return (!$filtroUsuario || $prestamo['idUser'] === $filtroUsuario) &&
             (!$filtroLibro || $prestamo['idBook'] === $filtroLibro) &&
-            ($filtroDevuelto === '' || $prestamo['devuelto'] == $filtroDevuelto);
+            ($devuelto === '' || $prestamo['devuelto'] == $devuelto);
     });
     ?>
 
@@ -46,9 +46,9 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     <label for="filtro_usuario" class="form-label">Nombre de Usuario:</label>
                     <select name="filtro_usuario" id="filtro_usuario" class="form-select">
                         <option value="">Todos</option>
-                        <?php foreach ($idUsers as $usuarioOption) { ?>
-                            <option value="<?php echo $usuarioOption; ?>" <?php echo ($filtroUsuario === $usuarioOption) ? 'selected' : ''; ?>>
-                                <?php echo $usuarioOption; ?>
+                        <?php foreach ($idUsers as $usuario) { ?>
+                            <option value="<?php echo $usuario; ?>" <?php echo ($filtroUsuario === $usuario) ? 'selected' : ''; ?>>
+                                <?php echo $usuario; ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -58,9 +58,9 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     <label for="filtro_libro" class="form-label">ID Libro:</label>
                     <select name="filtro_libro" id="filtro_libro" class="form-select">
                         <option value="">Todos</option>
-                        <?php foreach ($idBooks as $libroOption) { ?>
-                            <option value="<?php echo $libroOption; ?>" <?php echo ($filtroLibro === $libroOption) ? 'selected' : ''; ?>>
-                                <?php echo Book::getDato($libroOption, 'nombre') . '(' . $libroOption. ')'; ?>
+                        <?php foreach ($idBooks as $libro) { ?>
+                            <option value="<?php echo $libro; ?>" <?php echo ($filtroLibro === $libro) ? 'selected' : ''; ?>>
+                                <?php echo Book::getDato($libro, 'nombre') . '(' . $libro. ')'; ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -70,8 +70,8 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     <label for="filtro_devuelto" class="form-label">Devuelto:</label>
                     <select name="filtro_devuelto" id="filtro_devuelto" class="form-select">
                         <option value="">Todos</option>
-                        <option value="1" <?php echo ($filtroDevuelto === '1') ? 'selected' : ''; ?>>Sí</option>
-                        <option value="0" <?php echo ($filtroDevuelto === '0') ? 'selected' : ''; ?>>No</option>
+                        <option value="1" <?php echo ($devuelto === '1') ? 'selected' : ''; ?>>Sí</option>
+                        <option value="0" <?php echo ($devuelto === '0') ? 'selected' : ''; ?>>No</option>
                     </select>
                 </div>
             </div>
@@ -95,7 +95,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($prestamosFiltrados as $id => $prestamo) { ?>
+                    <?php foreach ($prestado as $id => $prestamo) { ?>
                         <tr>
                             <td><?php echo $id; ?></td>
                             <td><?php echo $prestamo['idUser']; ?></td>

@@ -103,10 +103,14 @@ if (isset($_SESSION['usuario']) && isset($_SESSION['admin'])) {
                 echo ' <h3>El libro no ha sido encontrado</h3>';
             }
 
-        }
-    } else if ($_GET['accion'] === 'eliminar') {
-        if (Book::delBook($id)) {
+        } else if ($_GET['accion'] === 'eliminar') {
+            if (Book::delBook($id)) {
 
+            }
+        } else if ($_GET['accion'] === 'prestar') {
+            require_once(__DIR__ . '/../model/Checkout.php');
+            Checkout::createCheckout($_SESSION['usuario'], $_GET['id']);
+            echo "<h3>Ha sacado el libro " . Book::getDato($_GET['id'], 'nombre') . "</h3>";
         }
     }
 } else {
