@@ -107,10 +107,12 @@ if (isset($_GET['accion'])) {
             if (isset($_GET['id'])) {
                 require_once(__DIR__ . '/../model/Checkout.php');
                 Checkout::createCheckout($_SESSION['usuario'], $_GET['id']);
-                echo '<div class="alert alert-success" role="alert">
-       Libro prestado exitosamente <a href="../controller/controllerIndex.php?opcion=misPrestamos"> Ver prestamos .</a>
-        </div>';
+                echo '<div class="alert alert-success align-items-center" role="alert">
+        <strong>Libro prestado exitosamente.</strong> 
+        <a href="../controller/controllerIndex.php?opcion=misPrestamos" class="alert-link">Ver préstamos</a>.
+      </div>';
 
+                include('../view/libros.php');
             }
             break;
 
