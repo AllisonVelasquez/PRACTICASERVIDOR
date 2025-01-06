@@ -7,15 +7,14 @@ if (!isset($_POST['login'])) {
     $nombre = $_POST['nombre'];
     $password = $_POST['password'];
     session_start();
-    $resultadoLogin = User::login($nombre, $password);
-    if ($resultadoLogin === true) {
-        $_SESSION['nombre'] =User::getDato($nombre,'nombre');
+    if (($resultadoLogin = User::login($nombre, $password) === true)) {
         $_SESSION['usuario'] = $nombre;
-        $_SESSION['admin']=User::getDato($nombre,'admin');
+        $_SESSION['admin'] = User::getDato($nombre, 'admin');
 
         header('location: ../controller/controllerIndex.php?opcion=libros');
     } else {
-        
-        include_once('../view/logIn.php');
+        $error = 'El campo nombre o contraseña son incorrectos';
+        include('../view/header.php');
+        include('../view/logIn.php');
     }
 }

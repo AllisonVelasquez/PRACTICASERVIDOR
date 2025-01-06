@@ -48,6 +48,7 @@ if (isset($_GET['opcion'])) {
                     break;
 
                 case 'verPrestamos':
+                    
                     if (isset($_POST['prestamo'])) {
                         if (isset($_POST['dias'])) {
                             Checkout::addDays($_POST['prestamo'], $_POST['dias']);

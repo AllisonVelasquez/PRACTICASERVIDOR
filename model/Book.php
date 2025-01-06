@@ -27,6 +27,8 @@ class Book
         $libros = self::getAll();
         if (self::comprobarBook($id)) {
             $libros[$id][$campo] = $value;
+            file_put_contents(self::$file, json_encode($libros));
+
             return "$campo modificado con éxito";
         }
         return "No hay ningún libro con el id $id";
@@ -37,7 +39,8 @@ class Book
         if (self::comprobarBook($id))
             return $libros[$id];
         return "No hay ningún libro con el id $id";
-    }    static function getDato($id, $campo)
+    }
+    static function getDato($id, $campo)
     {
         $libros = self::getAll();
         if (self::comprobarBook($id))

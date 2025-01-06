@@ -58,7 +58,6 @@ if (isset($_GET['accion'])) {
 
                 $id = intval($_POST['id']);
                 if (!empty($_POST['nombre']))
-                    echo $_POST['nombre'];
                     Book::setDato($id, 'nombre', $_POST['nombre']);
                 if (!empty($_POST['cantidad']))
                     Book::setDato($id, 'cantidad', intval($_POST['cantidad']));
@@ -89,7 +88,7 @@ if (isset($_GET['accion'])) {
                 $modificar = Book::getBook($_GET['id']);
                 include('../view/RegistroLibros.php');
             } else {
-                echo '<h3>El libro no ha sido encontrado</h3>';
+                $mensaje = '<h3>El libro no ha sido encontrado</h3>';
             }
             break;
 
@@ -97,11 +96,9 @@ if (isset($_GET['accion'])) {
             if ($isAdmin && isset($_GET['id'])) {
                 $id = intval($_GET['id']);
                 if (Book::delBook($id)) {
-                    echo "<h3 class='bg-success'>Libro eliminado exitosamente</h3>";
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit;
+                    $mensaje = "<h3 class='bg-success'>Libro eliminado exitosamente</h3>";
                 } else {
-                    echo "<p>Error al eliminar el libro.</p>";
+                    $mensaje = "<p>Error al eliminar el libro.</p>";
                 }
             }
             break;
@@ -110,7 +107,10 @@ if (isset($_GET['accion'])) {
             if (isset($_GET['id'])) {
                 require_once(__DIR__ . '/../model/Checkout.php');
                 Checkout::createCheckout($_SESSION['usuario'], $_GET['id']);
-                echo "<h3 class='bg-success'>Libro prestado exitosamente</h3>";
+                echo '<div class="alert alert-success" role="alert">
+       Libro prestado exitosamente <a href="../controller/controllerIndex.php?opcion=misPrestamos"> Ver prestamos .</a>
+        </div>';
+
             }
             break;
 

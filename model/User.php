@@ -59,7 +59,8 @@ class User
     // }
 
     //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
-    static function setDato($user, $campo, $valor) {
+    static function setDato($user, $campo, $valor)
+    {
         $users = self::getAll();
         if (self::comprobarUser($users, $user)) {
             if ($campo == 'pass') {
@@ -94,19 +95,22 @@ class User
 
     static function comprobarUser($users, $usu)
     {
-
-        return array_key_exists($usu, $users);
+        if ($users !== null) {
+            return array_key_exists($usu, $users);
+        }
     }
 
     static function login($usu, $pass)
     {
         $users = self::getAll();
-        if (self::comprobarUser($users, $usu)) {
-            if (password_verify($pass, $users[$usu]['pass']))
-                return true;
-            return "Contraseña incorrecta";
+        if ($users !== null) {
+            if (self::comprobarUser($users, $usu)) {
+                if (password_verify($pass, $users[$usu]['pass']))
+                    return true;
+                return false;
+            }
         }
-        return "Usuario no existe";
+        return false;
     }
 }
 //Crea un Admin
