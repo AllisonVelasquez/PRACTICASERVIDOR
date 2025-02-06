@@ -1,91 +1,83 @@
 <?php
+require(__DIR__ . '/CRUD.php');
 require_once("Book.php");
+
 class Checkout
 {
-
-    private static $file = __DIR__ . '/../data/checkouts.json';
+/* **********************************************************************************
+*
+*
+*    REVISAR: métodos comentados no se usan??, chequear las cosas comentadas        *
+*
+*
+*
+************************************************************************************/
 
     static function createCheckout($idUser, $idBook)
     {
-        $prestamos = self::getAll();
-        if (empty($prestamos)) {
-            $id = 1;
-        } else {
-            $id = array_key_last($prestamos) + 1;
+        try {
+            $prestamos = [
+                'idUser' => $idUser,
+                'idBook' => $idBook,
+                'dateP' => time(),
+                'dateD' => time() + 1296000,
+                'devuelto' => false,
+                'solicitudAmpliacion' => false,
+            ];
+            insert('checkouts', $prestamos);
+            Book::prestar($idBook); //movido para que si falla no se pierda el libro igual
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
-        $prestamos[$id] = [
-            'idUser' => $idUser,
-            'idBook' => $idBook,
-            'dateP' => time(),
-            'dateD' => time() + 1296000,
-            'devuelto' => false,
-            'solicitudAmpliacion' => false,
-            Book::prestar($idBook)
-
-        ];
-        file_put_contents(self::$file, json_encode($prestamos));
     }
 
-    static function addDays($id, $cantidadDias=7)
+    static function addDays($id, $cantidadDias = 7)
     {
-        $prestamos = self::getAll();
         if (self::comprobarCheckout($id)) {
-            $prestamos[$id]['dateD'] += $cantidadDias * 86400;
+            $fecha = getDataById('checkouts', 'fechaD', $id) + $cantidadDias; //revisar, esto no funciona así
+            updateDatabyParam('checkouts', $fecha , 'id', $id);
         }
-        file_put_contents(self::$file, json_encode($prestamos));
-
     }
 
-    static function getCheckout($id)
-    {
-        $prestamos = self::getAll();
-        if (self::comprobarCheckout($id))
-            return $prestamos[$id];
-        return "El préstamo $id no existe";
-    }
+    // static function getCheckout($id)
+    // {
+    //     $prestamos = self::getAll();
+    //     if (self::comprobarCheckout($id))
+    //         return $prestamos[$id];
+    //     return "El préstamo $id no existe";
+    // }
 
     static function getAll()
     {
-        if (file_exists(self::$file)) {
-            return json_decode(file_get_contents(self::$file), true);
-        }
-        return [];
+        return getAllByTable('checkouts');
     }
 
     static function comprobarCheckout($id)
     {
-        $prestamos = self::getAll();
-        return array_key_exists($id, $prestamos);
+        return (!empty(getDataById('checkouts', 'id', $id)));
     }
 
-    static function returnCheckout($id,$valor)
+    // static function returnCheckout($id, $valor)
+    // {
+    //     $prestamos = self::getAll();
+    //     if (self::comprobarCheckout($id)) {
+    //         // modifica la fecha al momento en que se devuelve el libro
+    //         $prestamos[$id]['dateD'] = time();
+
+    //         $prestamos[$id]['devuelto'] = $valor;
+    //         Book::devuelto($id);
+    //         file_put_contents(self::$file, json_encode($prestamos));
+
+    //         return "Libro devuelto";
+    //     }
+    //     return "El préstamo $id no existe";
+    // }
+
+    static function ampliar($id)
     {
-        $prestamos = self::getAll();
-        if (self::comprobarCheckout($id)) {
-            // modifica la fecha al momento en que se devuelve el libro
-            $prestamos[$id]['dateD'] = time();
-            
-            $prestamos[$id]['devuelto'] = $valor;
-            Book::devuelto($id);
-            file_put_contents(self::$file, json_encode($prestamos));
-
-            return "Libro devuelto";
-        }
-        return "El préstamo $id no existe";
-    }
-
-    static function ampliar($id){
-        $prestamos = self::getAll();
-        if (self::comprobarCheckout($id)) {
-            if($prestamos[$id]['solicitudAmpliacion'] == false){
-                $prestamos[$id]['solicitudAmpliacion'] = true;
-            file_put_contents(self::$file, json_encode($prestamos));
-            return true;
-            }
-            return false;
+        //0 = false y 1 = true ?????
+        if (self::comprobarCheckout($id)) { //realmente es necesario el comprobarCheckout??
+            updateDatabyParam('checkouts', ['solicitudAmpliacion' => 1], 'id', $id);
         }
     }
 }
-
-//revisar que un usu/libro exista?
-//revisar que un usuario no pueda tener el mismo libro dos veces
