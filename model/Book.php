@@ -2,7 +2,6 @@
 require(__DIR__ . '/CRUD.php');
 class Book
 {
-    private static $file = __DIR__ . '/../data/books.json';
 
     static function createBook($nombre, $cant, $autor, $gen, $desc, $url, $habilidado = true)
     {
@@ -48,10 +47,11 @@ class Book
         return (!empty(getDataById('books', 'id', $id)));
     }
 
-    static function getAll()
-    {
-        return getAllByTable('books');
-    }
+    // no se usa??????
+    // static function getAll()
+    // {
+    //     return getAllByTable('books');
+    // }
 
     static function prestar($id)
     {

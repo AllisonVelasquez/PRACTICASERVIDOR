@@ -1,5 +1,5 @@
 <?php
-require(__DIR__.'/config.php');
+require(__DIR__ . '/config.php');
 
 function conectar()
 {
@@ -46,7 +46,7 @@ function getDataById($tabla, $param, $id)
         $con = conectar();
         $sql = "SELECT $param FROM $tabla WHERE id=$id";
         $data = $con->query($sql);
-    return $data->fetchAll(PDO::FETCH_ASSOC);
+        return $data->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
 
         echo 'error ' + $e->getMessage() + '<br>';
@@ -136,5 +136,3 @@ function insert($tabla, $paramsYvalues)
         echo 'ERRRO' . $e->getMessage() . '<br>';
     }
 }
-
-//en las clases 2ue se usan datos cambiar el metodo de acceso qqa datos
