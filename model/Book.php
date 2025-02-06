@@ -1,5 +1,5 @@
 <?php
-require('./CRUD.php');
+require(__DIR__ . '/CRUD.php');
 class Book
 {
     private static $file = __DIR__ . '/../data/books.json';
@@ -25,52 +25,40 @@ class Book
 
     static function setDato($id, $campo, $value)
     {
-
         if (updateDatabyParam('books', [$campo => $value], 'id', $id) == true) {
             return "$campo modificado con éxito";
-        }else return "No hay ningún libro con el id $id";
+        } else return "No hay ningún libro con el id $id";
     }
     static function getBook($id)
     {
-        return  getAllByParam('books','id',$id);
-      
+        return  getAllByParam('books', 'id', $id);
     }
     static function getDato($id, $campo)
     {
-       return getDataById('books',$campo,$id);
+        return getDataById('books', $campo, $id);
     }
 
     static function delBook($id)
     {
-        $libros = self::getAll();
-        if (self::comprobarBook($id)) {
-            unset($libros[$id]);
-            file_put_contents(self::$file, json_encode($libros));
-            return true;
-        }
-        return false;
+        deleteById('books', $id);
     }
 
     static function comprobarBook($id)
     {
-        $libros = self::getAll();
-        return array_key_exists($id, $libros);
+        return (!empty(getDataById('books', 'id', $id)));
     }
 
     static function getAll()
     {
-        if (file_exists(self::$file)) {
-            return json_decode(file_get_contents(self::$file), true);
-        }
-        return [];
+        return getAllByTable('books');
     }
 
-    static function prestado($id)
+    static function prestar($id)
     {
-        $libros = self::getAll();
-        if (self::comprobarBook($id)) {
-            $libros[$id]['cantidad'] -= 1;
-            file_put_contents(self::$file, json_encode($libros));
+        $cant = getDataById('books', 'cantidad', $id);
+        // revisar
+        if (self::comprobarBook($id) && $cant > 0) {
+            updateDatabyParam('books', ['cantidad' => $cant - 1], 'id', $id);
             return true;
         }
         return false;
@@ -78,36 +66,25 @@ class Book
 
     static function devuelto($id)
     {
-        $libros = self::getAll();
+        $cant = getDataById('books', 'cantidad', $id);
+        // revisar
         if (self::comprobarBook($id)) {
-            $libros[$id]['cantidad'] += 1;
-            file_put_contents(self::$file, json_encode($libros));
+            updateDatabyParam('books', ['cantidad' => $cant + 1], 'id', $id);
             return true;
         }
         return false;
     }
     static function deshabilitar($id)
     {
-        $libros = self::getAll();
         if (self::comprobarBook($id)) {
-            if ($libros[$id]['hablitado'] === true) {
-                $libros[$id]['habilidato'] = false;
-                file_put_contents(self::$file, json_encode($libros));
-                return true;
-            }
+            updateDatabyParam('books', ['habilitado' => 0], 'id', $id);
         }
-        return false;
     }
+
     static function habilitar($id)
     {
-        $libros = self::getAll();
         if (self::comprobarBook($id)) {
-            if ($libros[$id]['hablitado'] === false) {
-                $libros[$id]['habilidato'] = true;
-                file_put_contents(self::$file, json_encode($libros));
-                return true;
-            }
+            updateDatabyParam('books', ['habilitado' => 1], 'id', $id);
         }
-        return false;
     }
 }
