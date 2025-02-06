@@ -1,115 +1,118 @@
 <?php
 class User
 {
-    private static $file = __DIR__ . '/../data/users.json';
-
     static function createUser($user, $nombre, $pass, $correo, $admin = false)
     {
-        $users = self::getAll();
-
-        $users[$user] = [
-            'nombre' => $nombre,
-            'pass' => password_hash($pass, PASSWORD_DEFAULT),
-            'correo' => $correo,
-            'admin' => $admin,
-            'blocked' => false
-        ];
-
-        file_put_contents(self::$file, json_encode($users));
-    }
-
-    static function delUser($user)
-    {
-        $users = self::getAll();
-        if (self::comprobarUser($users, $user)) {
-            unset($users[$user]);
-            file_put_contents(self::$file, json_encode($users));
-            return true;
+        try {
+            $user = [
+                'nombre' => $nombre,
+                'pass' => password_hash($pass, PASSWORD_DEFAULT),
+                'correo' => $correo,
+                'admin' => $admin,
+                'blocked' => false
+            ];
+            insert('users', $user);
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
-        return false;
     }
+/* 
+----> comentado una vez = del código en json aun sin pasar a bbdd
+----> comentado doble = comentado de antes en el código json
 
-    // static function blockUser($user)
+*/
+    // static function delUser($user)
     // {
     //     $users = self::getAll();
     //     if (self::comprobarUser($users, $user)) {
-    //         if ($users[$user]['blocked'] == false) {
-    //             $users[$user]['blocked'] = true;
-    //             file_put_contents(self::$file, json_encode($users));
-    //             return "Usuario bloqueado con éxito";
-    //         }
-    //         return "El usuario ya estaba bloqueado";
+    //         unset($users[$user]);
+    //         file_put_contents(self::$file, json_encode($users));
+    //         return true;
     //     }
-    //     return "Nombre de usuario no existe";
+    //     return false;
     // }
 
+    // // static function blockUser($user)
+    // // {
+    // //     $users = self::getAll();
+    // //     if (self::comprobarUser($users, $user)) {
+    // //         if ($users[$user]['blocked'] == false) {
+    // //             $users[$user]['blocked'] = true;
+    // //             file_put_contents(self::$file, json_encode($users));
+    // //             return "Usuario bloqueado con éxito";
+    // //         }
+    // //         return "El usuario ya estaba bloqueado";
+    // //     }
+    // //     return "Nombre de usuario no existe";
+    // // }
 
-    // static function unblockUser($user)
+
+    // // static function unblockUser($user)
+    // // {
+    // //     $users = self::getAll();
+    // //     if (self::comprobarUser($users, $user)) {
+    // //         if ($users[$user]['blocked'] == true) {
+    // //             $users[$user]['blocked'] = false;
+    // //             file_put_contents(self::$file, json_encode($users));
+    // //             return "Usuario desbloqueado con éxito";
+    // //         }
+    // //         return "El usuario no estaba bloqueado";
+    // //     }
+    // //     return "Nombre de usuario no existe";
+    // // }
+
+    // //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
+    // static function setDato($user, $campo, $valor)
     // {
     //     $users = self::getAll();
     //     if (self::comprobarUser($users, $user)) {
-    //         if ($users[$user]['blocked'] == true) {
-    //             $users[$user]['blocked'] = false;
+    //         if ($campo == 'pass') {
+    //             $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
     //             file_put_contents(self::$file, json_encode($users));
-    //             return "Usuario desbloqueado con éxito";
+    //             return "Contraseña cambiada con éxito";
+    //         } else {
+    //             $users[$user][$campo] = $valor;
+    //             file_put_contents(self::$file, json_encode($users));
+    //             return "$campo modificado con éxito";
     //         }
-    //         return "El usuario no estaba bloqueado";
     //     }
-    //     return "Nombre de usuario no existe";
+    //     return "Usuario $user no existe";
     // }
 
-    //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
-    static function setDato($user, $campo, $valor)
-    {
-        $users = self::getAll();
-        if (self::comprobarUser($users, $user)) {
-            if ($campo == 'pass') {
-                $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
-                file_put_contents(self::$file, json_encode($users));
-                return "Contraseña cambiada con éxito";
-            } else {
-                $users[$user][$campo] = $valor;
-                file_put_contents(self::$file, json_encode($users));
-                return "$campo modificado con éxito";
-            }
-        }
-        return "Usuario $user no existe";
-    }
+    // static function getDato($user, $campo)
+    // {
+    //     $users = self::getAll();
+    //     if (self::comprobarUser($users, $user))
+    //         return $users[$user][$campo];
+    //     return "Usuario $user no existe";
+    // }
 
-    static function getDato($user, $campo)
-    {
-        $users = self::getAll();
-        if (self::comprobarUser($users, $user))
-            return $users[$user][$campo];
-        return "Usuario $user no existe";
-    }
-
-    static function getAll()
-    {
-        if (file_exists(self::$file)) {
-            return json_decode(file_get_contents(self::$file), true);
-        }
-        return [];
-    }
+    // static function getAll()
+    // {
+    //     if (file_exists(self::$file)) {
+    //         return json_decode(file_get_contents(self::$file), true);
+    //     }
+    //     return [];
+    // }
 
 
-    static function comprobarUser($users, $usu)
-    {
-        if ($users !== null) {
-            return array_key_exists($usu, $users);
-        }
-    }
+    // static function comprobarUser($users, $usu)
+    // {
+    //     if ($users !== null) {
+    //         return array_key_exists($usu, $users);
+    //     }
+    // }
 
-    static function login($usu, $pass)
-    {
-        $users = self::getAll();
-        if ($users !== null) {
-            if (self::comprobarUser($users, $usu)) {
-                if (password_verify($pass, $users[$usu]['pass']))
-                    return true;
-                return false;
-            }
-        }
-        return false;
-    }
+    // static function login($usu, $pass)
+    // {
+    //     $users = self::getAll();
+    //     if ($users !== null) {
+    //         if (self::comprobarUser($users, $usu)) {
+    //             if (password_verify($pass, $users[$usu]['pass']))
+    //                 return true;
+    //             return false;
+    //         }
+    //     }
+    //     return false;
+    // }
 }

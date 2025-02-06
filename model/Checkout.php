@@ -16,7 +16,7 @@ class Checkout
     static function createCheckout($idUser, $idBook)
     {
         try {
-            $prestamos = [
+            $prestamo = [
                 'idUser' => $idUser,
                 'idBook' => $idBook,
                 'dateP' => time(),
@@ -24,7 +24,7 @@ class Checkout
                 'devuelto' => false,
                 'solicitudAmpliacion' => false,
             ];
-            insert('checkouts', $prestamos);
+            insert('checkouts', $prestamo);
             Book::prestar($idBook); //movido para que si falla no se pierda el libro igual
         } catch (PDOException $th) {
             echo $th->getMessage();
