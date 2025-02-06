@@ -1,5 +1,5 @@
 <?php
-require('config.php');
+require(__DIR__.'/config.php');
 
 function conectar()
 {
@@ -93,6 +93,28 @@ function updateDatabyParam($tabla, $paramsYvalues, $condicion, $valueCondicion)
     }
 }
 
+// function updateSingleDatabyParam($tabla, $paramsYvalues, $condicion, $valueCondicion)
+// {
+
+//     try {
+//         $con = conectar();
+//         $con->beginTransaction();
+//         $newData = [];
+//         foreach ($paramsYvalues as $key => $value) {
+//             (is_string($value) ? $newData[] = "$key= '$value'" : $newData[] = "$key= $value");
+//         };
+//         $string = implode(',', $newData);
+//         $consulta = "UPDATE $tabla SET $string WHERE $condicion=$valueCondicion";
+//         $resultado = $con->exec($consulta);
+//         if ($resultado == 0) $con->rollback();
+//         if ($resultado != 0) {
+//             $con->commit();
+//             return true;
+//         }
+//     } catch (PDOException $e) {
+//         echo 'Error ' + $e->getMessage() + '<br>';
+//     }
+// }
 
 function insert($tabla, $paramsYvalues)
 {

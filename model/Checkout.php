@@ -20,7 +20,7 @@ class Checkout
             'dateD' => time() + 1296000,
             'devuelto' => false,
             'solicitudAmpliacion' => false,
-            Book::prestado($idBook)
+            Book::prestar($idBook)
 
         ];
         file_put_contents(self::$file, json_encode($prestamos));
