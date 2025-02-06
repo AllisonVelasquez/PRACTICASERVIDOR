@@ -113,7 +113,3 @@ class User
         return false;
     }
 }
-//Crea un Admin
-
-/* User::createUser('allis', 'allis', 'allis', 'allis@gmail.com', true);
- */

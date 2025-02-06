@@ -47,11 +47,10 @@ class Book
         return (!empty(getDataById('books', 'id', $id)));
     }
 
-    // no se usa??????
-    // static function getAll()
-    // {
-    //     return getAllByTable('books');
-    // }
+    static function getAll()
+    {
+        return getAllByTable('books');
+    }
 
     static function prestar($id)
     {
