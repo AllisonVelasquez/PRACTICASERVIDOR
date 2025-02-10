@@ -4,7 +4,7 @@ require_once("Book.php");
 
 class Checkout
 {
-/* **********************************************************************************
+    /* **********************************************************************************
 *
 *
 *    REVISAR: métodos comentados no se usan??, chequear las cosas comentadas        *
@@ -33,11 +33,19 @@ class Checkout
 
     static function addDays($id, $cantidadDias = 7)
     {
-        if (self::comprobarCheckout($id)) {
-            $fecha = getDataById('checkouts', 'fechaD', $id) + $cantidadDias; //revisar, esto no funciona así
-            updateDatabyParam('checkouts', $fecha , 'id', $id);
+        try {
+            if (self::comprobarCheckout($id)) {
+
+                $fecha = getDataById('checkouts', 'fechaD', $id);
+                $fecha = new DateTime($fecha);
+                $fecha->modify("+$cantidadDias days");
+                updateDatabyParam('checkouts', ['fechaD' => $fecha->format('Y-m-d')], 'id', $id);
+            }
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
     }
+
 
     // static function getCheckout($id)
     // {
@@ -49,35 +57,46 @@ class Checkout
 
     static function getAll()
     {
-        return getAllByTable('checkouts');
+        try {
+            return getAllByTable('checkouts');
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
     }
 
     static function comprobarCheckout($id)
     {
-        return (!empty(getDataById('checkouts', 'id', $id)));
+        try {
+            return (!empty(getDataById('checkouts', 'id', $id)));
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
     }
 
-    // static function returnCheckout($id, $valor)
-    // {
-    //     $prestamos = self::getAll();
-    //     if (self::comprobarCheckout($id)) {
-    //         // modifica la fecha al momento en que se devuelve el libro
-    //         $prestamos[$id]['dateD'] = time();
+    static function returnCheckout($id, $valor)
+    {
+        try {
+            if (self::comprobarCheckout($id)) {
+                $devolver = time();
+                Book::devuelto($id);
+                updateDatabyParam('checkouts', ['dateD' => $devolver], 'id', $id);
 
-    //         $prestamos[$id]['devuelto'] = $valor;
-    //         Book::devuelto($id);
-    //         file_put_contents(self::$file, json_encode($prestamos));
-
-    //         return "Libro devuelto";
-    //     }
-    //     return "El préstamo $id no existe";
-    // }
+                return "Libro devuelto";
+            }
+            return "El préstamo $id no existe";
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
 
     static function ampliar($id)
     {
-        //0 = false y 1 = true ?????
-        if (self::comprobarCheckout($id)) { //realmente es necesario el comprobarCheckout??
-            updateDatabyParam('checkouts', ['solicitudAmpliacion' => 1], 'id', $id);
+        try {
+            if (self::comprobarCheckout($id)) { //realmente es necesario el comprobarCheckout??
+                updateDatabyParam('checkouts', ['solicitudAmpliacion' => 1], 'id', $id);
+            }
+        } catch (PDOException $th) {
+            echo $th->getMessage();
         }
     }
 }

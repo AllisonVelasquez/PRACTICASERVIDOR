@@ -13,7 +13,7 @@ if (isset($_POST['registrarse'])) {
     $password2 = $_POST['password2'];
 
     //Comprobamos si el nombre de usuario ya esta registrado en la base de datos
-    if(User::comprobarUser(User::getAll(),$nombreUsuario))
+    if(User::comprobarUser($nombreUsuario))
         $errores['usr'] = 'Nombre de usuario ya existente. Intenta con otro';
 
     if ($password1 !== $password2) {

@@ -1,4 +1,5 @@
 <?php
+require(__DIR__ . '/CRUD.php');
 class User
 {
     static function createUser($user, $nombre, $pass, $correo, $admin = false)
@@ -16,103 +17,93 @@ class User
             echo $th->getMessage();
         }
     }
-/* 
-----> comentado una vez = del código en json aun sin pasar a bbdd
-----> comentado doble = comentado de antes en el código json
+    static function getAll()
+    {
+        try {
+            return  getAllByTable("users");
 
-*/
-    // static function delUser($user)
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
+    static function delUser($user)
+    {
+        try {
+            self::comprobarUser($user);
+            deleteById('users', $user);
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
+
+    // static function blockUser($user)
     // {
     //     $users = self::getAll();
     //     if (self::comprobarUser($users, $user)) {
-    //         unset($users[$user]);
-    //         file_put_contents(self::$file, json_encode($users));
-    //         return true;
+    //         if ($users[$user]['blocked'] == false) {
+    //             $users[$user]['blocked'] = true;
+    //             file_put_contents(self::$file, json_encode($users));
+    //             return "Usuario bloqueado con éxito";
+    //         }
+    //         return "El usuario ya estaba bloqueado";
     //     }
-    //     return false;
+    //     return "Nombre de usuario no existe";
     // }
 
-    // // static function blockUser($user)
-    // // {
-    // //     $users = self::getAll();
-    // //     if (self::comprobarUser($users, $user)) {
-    // //         if ($users[$user]['blocked'] == false) {
-    // //             $users[$user]['blocked'] = true;
-    // //             file_put_contents(self::$file, json_encode($users));
-    // //             return "Usuario bloqueado con éxito";
-    // //         }
-    // //         return "El usuario ya estaba bloqueado";
-    // //     }
-    // //     return "Nombre de usuario no existe";
-    // // }
 
-
-    // // static function unblockUser($user)
-    // // {
-    // //     $users = self::getAll();
-    // //     if (self::comprobarUser($users, $user)) {
-    // //         if ($users[$user]['blocked'] == true) {
-    // //             $users[$user]['blocked'] = false;
-    // //             file_put_contents(self::$file, json_encode($users));
-    // //             return "Usuario desbloqueado con éxito";
-    // //         }
-    // //         return "El usuario no estaba bloqueado";
-    // //     }
-    // //     return "Nombre de usuario no existe";
-    // // }
-
-    // //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
-    // static function setDato($user, $campo, $valor)
+    // static function unblockUser($user)
     // {
     //     $users = self::getAll();
     //     if (self::comprobarUser($users, $user)) {
-    //         if ($campo == 'pass') {
-    //             $users[$user][$campo] = password_hash($valor, PASSWORD_DEFAULT);
+    //         if ($users[$user]['blocked'] == true) {
+    //             $users[$user]['blocked'] = false;
     //             file_put_contents(self::$file, json_encode($users));
-    //             return "Contraseña cambiada con éxito";
-    //         } else {
-    //             $users[$user][$campo] = $valor;
-    //             file_put_contents(self::$file, json_encode($users));
-    //             return "$campo modificado con éxito";
+    //             return "Usuario desbloqueado con éxito";
     //         }
+    //         return "El usuario no estaba bloqueado";
     //     }
-    //     return "Usuario $user no existe";
+    //     return "Nombre de usuario no existe";
     // }
 
-    // static function getDato($user, $campo)
-    // {
-    //     $users = self::getAll();
-    //     if (self::comprobarUser($users, $user))
-    //         return $users[$user][$campo];
-    //     return "Usuario $user no existe";
-    // }
+    //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
+    static function setDato($user, $campo, $valor)
+    {
+        try {
 
-    // static function getAll()
-    // {
-    //     if (file_exists(self::$file)) {
-    //         return json_decode(file_get_contents(self::$file), true);
-    //     }
-    //     return [];
-    // }
+            if (updateDatabyParam('users', [$campo => $valor], 'id', $user)) {
+                return "$campo modificado con éxito";
+            } else
+                return "No hay ningún usuario con el id $user";
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
 
+    static function getDato($user, $campo)
+    {
+        try {
+            return getDataById('books', $campo, $user);
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
+    static function comprobarUser($usu)
+    {
+        try {
+            return (!empty(getDataById('users', 'id', $usu)));
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+        }
+    }
 
-    // static function comprobarUser($users, $usu)
-    // {
-    //     if ($users !== null) {
-    //         return array_key_exists($usu, $users);
-    //     }
-    // }
+    static function login($usu, $pass)
+    {
 
-    // static function login($usu, $pass)
-    // {
-    //     $users = self::getAll();
-    //     if ($users !== null) {
-    //         if (self::comprobarUser($users, $usu)) {
-    //             if (password_verify($pass, $users[$usu]['pass']))
-    //                 return true;
-    //             return false;
-    //         }
-    //     }
-    //     return false;
-    // }
+        if (self::comprobarUser($usu)) {
+            $password = getDataById('users', 'pass', $usu);
+            if (password_verify($pass, $password))
+                return true;
+        }
+        return false;
+    }
 }
