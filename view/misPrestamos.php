@@ -21,14 +21,14 @@
         </thead>
         <tbody>
             <?php
-            $hoy = new DateTime();
-            foreach ($prestamos as $id => $prestamo) {
+/*             $hoy = new DateTime();
+ */            foreach ($prestamos as $id => $prestamo) {
                 if ($prestamo['idUser'] === $usuario) {
-                    $dateDevolucion = new DateTime(date('Y-m-d', $prestamo['dateD'])); // Convierte el timestamp a formato Y-m-d
-                    $diferencia = $hoy->diff($dateDevolucion);
+/*                     $dateDevolucion = new DateTime(date('Y-m-d', $prestamo['dateD'])); // Convierte el timestamp a formato Y-m-d
+ */    /*                 $diferencia = $hoy->diff($dateDevolucion); */
 
 
-                    if ($diferencia->invert && $prestamo['devuelto'] === false) {
+                    if (/* $diferencia->invert && */ $prestamo['devuelto'] === false) {
 
                         ?>
                         <tr class="bg-danger-subtle border-danger">
@@ -43,7 +43,7 @@
                         ?>
                             <tr class="bg-primary-subtle border-primary">
                         <?php } ?>
-                        <td><?php echo Book::getDato($prestamo['idBook'], 'nombre'); ?></td>
+                        <td><?php echo Book::getDato($prestamo['idBook'], 'nombre')[0]['nombre']; ?></td>
                         <td><?php echo  $prestamo['dateP']; ?></td>
                         <td><?php echo  $prestamo['dateD']; ?></td>
                         <td>
