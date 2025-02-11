@@ -5,14 +5,15 @@ class User
     static function createUser($user, $nombre, $pass, $correo, $admin = false)
     {
         try {
-            $user = [
+            $usuario = [
+                'id' => $user,
                 'nombre' => $nombre,
                 'pass' => password_hash($pass, PASSWORD_DEFAULT),
                 'correo' => $correo,
                 'admin' => $admin,
                 'blocked' => false
             ];
-            insert('users', $user);
+            insert('users', $usuario);
         } catch (PDOException $th) {
             echo $th->getMessage();
         }

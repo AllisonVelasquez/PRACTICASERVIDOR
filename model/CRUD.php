@@ -46,7 +46,8 @@ function getDataById($tabla, $param, $id)
         $con = conectar();
         $sql = "SELECT $param FROM $tabla WHERE id=$id";
         $data = $con->query($sql);
-        return $data->fetchAll(PDO::FETCH_ASSOC);
+        if ($data != false)  return $data->fetchAll(PDO::FETCH_ASSOC);
+        else return false;
     } catch (PDOException $e) {
 
         echo 'error ' + $e->getMessage() + '<br>';
@@ -87,7 +88,7 @@ function updateDatabyParam($tabla, $paramsYvalues, $condicion, $valueCondicion)
         if ($resultado != 0) {
             $con->commit();
             return true;
-        }else
+        } else
             return false;
     } catch (PDOException $e) {
         echo 'Error ' + $e->getMessage() + '<br>';
