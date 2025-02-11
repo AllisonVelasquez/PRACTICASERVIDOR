@@ -10,7 +10,5 @@ De esta forma podria haber algo de iteraccion entre usuario y admin
 al crear un nuevo libro se añadi el campo habilidado que se verifica si esta en true o false para hacer una simulacion de un libro borrado 
 si el cmapo esta en false el libro no estara disponible para prestarse pero aun existira en la base de datos por lo cual se puede devolver 
 
-* Preguntar si tiene sentido tener métodos simples (ej: getAll,comprobarLibro) o es 
-mejor usarlos directamente 
-
+* Formato fechas préstamos en la bbdd
 -->
