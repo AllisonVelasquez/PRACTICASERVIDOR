@@ -30,7 +30,7 @@ if (isset($_POST['registrarse'])) {
         if(empty(User::getAll())){
         User::createUser($nombreUsuario, $nombre, $password1, $email,true);
         }
-        else{
+        else if(!empty(User::getAll())){
         User::createUser($nombreUsuario, $nombre, $password1, $email);
     }
     echo '<div class="alert alert-primary" role="alert">

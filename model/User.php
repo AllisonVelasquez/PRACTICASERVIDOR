@@ -1,40 +1,29 @@
 <?php
-require(__DIR__ . '/CRUD.php');
+require_once(__DIR__ . '/CRUD.php');
 class User
 {
-    static function createUser($user, $nombre, $pass, $correo, $admin = false)
+    static function createUser($user, $nombre, $pass, $correo, $admin = 0)
     {
-        try {
-            $usuario = [
-                'id' => $user,
-                'nombre' => $nombre,
-                'pass' => password_hash($pass, PASSWORD_DEFAULT),
-                'correo' => $correo,
-                'admin' => $admin,
-                'blocked' => false
-            ];
-            insert('users', $usuario);
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+
+
+        insert('users', [
+            'id' => $user,
+            'nombre' => $nombre,
+            'pass' => password_hash($pass, PASSWORD_DEFAULT),
+            'correo' => $correo,
+            'admin' => $admin,
+            'blocked' => 0
+        ]);
     }
     static function getAll()
     {
-        try {
-            return  getAllByTable("users");
-
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+        return  getAllByTable("users");
     }
     static function delUser($user)
     {
-        try {
-            self::comprobarUser($user);
-            deleteById('users', $user);
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+
+        self::comprobarUser($user);
+        deleteById('users', $user);
     }
 
     // static function blockUser($user)
@@ -69,41 +58,31 @@ class User
     //Asegurarnos de que siempre revise si es admin para cambiar admin y blocked
     static function setDato($user, $campo, $valor)
     {
-        try {
 
-            if (updateDatabyParam('users', [$campo => $valor], 'id', $user)) {
-                return "$campo modificado con éxito";
-            } else
-                return "No hay ningún usuario con el id $user";
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+
+        if (updateDatabyParam('users', [$campo => $valor], 'id', $user)) {
+            return "$campo modificado con éxito";
+        } else
+            return "No hay ningún usuario con el id $user";
     }
 
     static function getDato($user, $campo)
     {
-        try {
-            return getDataById('books', $campo, $user);
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+
+        return getDataById('books', $campo, $user);
     }
     static function comprobarUser($usu)
     {
-        try {
-            return (!empty(getDataById('users', 'id', $usu)));
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
+
+        return (!empty(getDataById('users', 'id', $usu)));
     }
 
     static function login($usu, $pass)
     {
 
         if (self::comprobarUser($usu)) {
-            $password = getDataById('users', 'pass', $usu);
-            if (password_verify($pass, $password))
-                return true;
+            $password = getDataById('users', 'pass', $usu)[0]['pass'];
+            if (password_verify($pass, $password)) return true;
         }
         return false;
     }

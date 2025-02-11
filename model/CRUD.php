@@ -4,10 +4,12 @@ require(__DIR__ . '/config.php');
 function conectar()
 {
     try {
-        $con = new PDO(dsn, dbuser, dbpass, [
-            PDO::ATTR_ERRMODE,
-            PDO::ERRMODE_EXCEPTION
-        ]);
+        
+            $con = new PDO(dsn, dbuser, dbpass, [
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            ]);
+        
         return $con;
     } catch (PDOException $e) {
         echo 'error ' + $e->getMessage() + '<br>';
@@ -23,6 +25,7 @@ function getAllByTable($tabla)
         $data = $con->query($sql);
 
         return $data->fetchAll(PDO::FETCH_ASSOC);
+        
     } catch (PDOException $e) {
         echo 'error ' + $e->getMessage() + '<br>';
     }
@@ -32,7 +35,7 @@ function getAllByParam($tabla, $param, $value)
 {
     try {
         $con = conectar();
-        $sql = "SELECT * FROM $tabla WHERE $param=$value";
+        $sql = "SELECT * FROM $tabla WHERE $param='$value'";
         $data = $con->query($sql);
         return $data->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -44,7 +47,7 @@ function getDataById($tabla, $param, $id)
 {
     try {
         $con = conectar();
-        $sql = "SELECT $param FROM $tabla WHERE id=$id";
+        $sql = "SELECT $param FROM $tabla WHERE id='$id'";
         $data = $con->query($sql);
         if ($data != false)  return $data->fetchAll(PDO::FETCH_ASSOC);
         else return false;
@@ -59,7 +62,7 @@ function deleteById($tabla, $id)
     try {
         $con = conectar();
         $con->beginTransaction();
-        $consulta = "DELETE FROM $tabla WHERE id=$id";
+        $consulta = "DELETE FROM $tabla WHERE id='$id'";
         $resultado = $con->exec($consulta);
         if ($resultado == 0) $con->rollback();
         if ($resultado != 0) {
@@ -115,3 +118,12 @@ function insert($tabla, $paramsYvalues)
         echo 'ERRRO' . $e->getMessage() . '<br>';
     }
 }
+/* 
+ insert('checkouts', [
+    'idUser' => 'alexy',
+    'idBook' => 1,
+    'dateP' => Date('Y-m-d',time()),
+    'dateD' => Date('Y-m-d',time() + 1296000),
+    'devuelto' => 0,
+    'solicitudAmpliacion' => 0,
+]);  */

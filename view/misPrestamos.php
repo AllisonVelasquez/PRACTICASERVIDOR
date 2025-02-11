@@ -44,8 +44,8 @@
                             <tr class="bg-primary-subtle border-primary">
                         <?php } ?>
                         <td><?php echo Book::getDato($prestamo['idBook'], 'nombre'); ?></td>
-                        <td><?php echo date("d-m-Y", $prestamo['dateP']); ?></td>
-                        <td><?php echo date("d-m-Y", $prestamo['dateD']); ?></td>
+                        <td><?php echo  $prestamo['dateP']; ?></td>
+                        <td><?php echo  $prestamo['dateD']; ?></td>
                         <td>
                             <?php echo $prestamo['devuelto'] ? 'Sí' : 'No'; ?>
                         </td>

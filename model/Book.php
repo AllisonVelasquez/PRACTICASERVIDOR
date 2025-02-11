@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . '/CRUD.php');
+require_once(__DIR__ . '/CRUD.php');
 class Book
 {
 
@@ -83,7 +83,7 @@ class Book
             $cant = getDataById('books', 'cantidad', $id);
             // revisar
             if (self::comprobarBook($id) && $cant > 0) {
-                updateDatabyParam('books', ['cantidad' => $cant - 1], 'id', $id);
+                updateDatabyParam('books', ['cantidad' => $cant--], 'id', $id);
                 return true;
             }
             return false;
