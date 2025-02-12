@@ -46,17 +46,31 @@ function getAllByParam($tabla, $param, $value)
 function getDataById($tabla, $param, $id)
 {
     try {
-        $con = conectar();
-        $sql = "SELECT $param FROM $tabla WHERE id='$id'";
-        $data = $con->query($sql);
-        if ($data != false) 
-         return $data->fetchAll(PDO::FETCH_ASSOC);
-        else return false;
-    } catch (PDOException $e) {
+        $con = conectar(); // Asegúrate de que la función conectar() esté definida correctamente.
 
-        echo 'error ' + $e->getMessage() + '<br>';
+        // Validamos que el parámetro $param sea válido (es decir, que sea un nombre de columna)
+        // Este paso es opcional y depende de cómo se gestionen las columnas en tu base de datos.
+        $sql = "SELECT $param FROM $tabla WHERE id = :id"; // Usamos un marcador de posición para el ID
+        $stmt = $con->prepare($sql);
+        
+        // Vinculamos el valor de $id, el cual puede ser tanto un int como un string.
+        if (is_int($id)) {
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        } else {
+            $stmt->bindParam(':id', $id, PDO::PARAM_STR); // Para cadenas
+        }
+
+        // Ejecutamos la consulta
+        $stmt->execute();
+
+        // Retornamos los resultados como un array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Concatenación de cadenas con el operador correcto
+        echo 'Error: ' . $e->getMessage() . '<br>';
     }
 }
+
 
 function deleteById($tabla, $id)
 {

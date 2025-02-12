@@ -24,6 +24,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS biblioteca;
 USE biblioteca;
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
+--Para alison es admin_password :)
 
 -- Otorgar todos los privilegios sobre la base de datos 'biblioteca' al usuario 'admin_biblioteca'
 GRANT ALL PRIVILEGES ON biblioteca.* TO 'admin'@'localhost';
