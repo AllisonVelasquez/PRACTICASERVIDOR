@@ -1,5 +1,5 @@
 <?php
 
-define("dsn",'mysql:host=localhost;dbname=biblioteca');
-define("dbuser",'admin');
-define("dbpass",'admin');
+define("dsn", 'mysql:host=localhost;dbname=biblioteca');
+define("dbuser", 'admin');
+define("dbpass", 'admin_password');
