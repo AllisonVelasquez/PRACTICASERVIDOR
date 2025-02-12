@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS biblioteca;
 USE biblioteca;
-CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin_password';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
 
 -- Otorgar todos los privilegios sobre la base de datos 'biblioteca' al usuario 'admin_biblioteca'
-GRANT ALL PRIVILEGES ON biblioteca.* TO 'admin_biblioteca'@'localhost';
+GRANT ALL PRIVILEGES ON biblioteca.* TO 'admin'@'localhost';
 
 -- Asegurarse de que los cambios en privilegios se apliquen
 FLUSH PRIVILEGES;

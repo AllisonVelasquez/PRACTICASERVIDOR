@@ -68,8 +68,8 @@ class User
 
     static function getDato($user, $campo)
     {
-
-        return getDataById('books', $campo, $user);
+$a=getDataById('books', $campo, $user);
+        return $a;
     }
     static function comprobarUser($usu)
     {

@@ -49,7 +49,8 @@ function getDataById($tabla, $param, $id)
         $con = conectar();
         $sql = "SELECT $param FROM $tabla WHERE id='$id'";
         $data = $con->query($sql);
-        if ($data != false)  return $data->fetchAll(PDO::FETCH_ASSOC);
+        if ($data != false) 
+         return $data->fetchAll(PDO::FETCH_ASSOC);
         else return false;
     } catch (PDOException $e) {
 

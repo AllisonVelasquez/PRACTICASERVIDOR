@@ -10,6 +10,7 @@ if (!isset($_POST['login'])) {
     if (($resultadoLogin = User::login($nombre, $password) === true)) {
         $_SESSION['usuario'] = $nombre;
         $_SESSION['admin'] = User::getDato($nombre, 'admin');
+        echo $_SESSION['admin'];
 
         header('location: ../controller/controllerIndex.php?opcion=libros');
     } else {
