@@ -13,9 +13,10 @@ if (!isset($_SESSION['usuario'])) {
 
 if (isset($_GET['accion'])) {
     // Verificar si el usuario es administrador
-    $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
+    $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] == '1';
 
     switch ($_GET['accion']) {
+
         case 'add':
             if ($isAdmin && isset($_POST['addLibro'])) {
                 // Validar y recoger datos del formulario
@@ -38,6 +39,7 @@ if (isset($_GET['accion'])) {
                     }
 
                     if (move_uploaded_file($tmpName, $uploadFile)) {
+
                         $img = str_replace('/', '\/', $uploadFile);
                         require(__DIR__ . '/../model/Book.php');
                         Book::createBook($nombre, $cantidad, $autor, $genero, $descripcion, $img);
@@ -49,6 +51,7 @@ if (isset($_GET['accion'])) {
                 } else {
                     echo "<p>No se pudo cargar la imagen.</p>";
                 }
+
             }
             break;
 
