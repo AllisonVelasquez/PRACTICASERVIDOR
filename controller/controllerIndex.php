@@ -37,7 +37,6 @@ if (isset($_GET['opcion'])) {
             case 'zonaRestringida':
                 include_once(__DIR__ . '/../view/zonaRestringida.php');
                 break;
-
         }
         if ($_SESSION['admin']) {
             switch ($opcion) {
@@ -48,8 +47,8 @@ if (isset($_GET['opcion'])) {
                     break;
 
                 case 'verPrestamos':
-                    
-                    if (isset($_POST['prestamo']))  {
+
+                    if (isset($_POST['prestamo'])) {
                         if (isset($_POST['dias'])) {
                             Checkout::addDays($_POST['prestamo'], $_POST['dias']);
                         } else if (isset($_POST['devuelto'])) {
@@ -73,7 +72,6 @@ if (isset($_GET['opcion'])) {
                     include_once(__DIR__ . '/../view/libros.php');
                     break;
             }
-
         }
     }
     /* En caso de que el usuario no este logueado solo tendra acceso libre a estas paginas */ else if (!isset($_SESSION['usuario'])) {
@@ -101,4 +99,3 @@ if (isset($_GET['opcion'])) {
     include_once(__DIR__ . '/../view/libros.php');
 }
 //la opcion de prestar solo aparece cuando el usuario esta logueado 
-
