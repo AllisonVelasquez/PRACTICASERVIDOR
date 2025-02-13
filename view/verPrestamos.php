@@ -34,7 +34,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
             (!$filtroLibro || $prestamo['idBook'] === $filtroLibro) &&
             ($devuelto === '' || $prestamo['devuelto'] == $devuelto);
     });
-    ?>
+?>
 
     <!-- Formulario de Filtro -->
     <div class="container my-5">
@@ -60,7 +60,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                         <option value="">Todos</option>
                         <?php foreach ($idBooks as $libro) { ?>
                             <option value="<?php echo $libro; ?>" <?php echo ($filtroLibro === $libro) ? 'selected' : ''; ?>>
-                                <?php echo Book::getDato($libro, 'nombre') . '(' . $libro. ')'; ?>
+                                <?php echo Book::getDato($libro, 'nombre') . '(' . $libro . ')'; ?>
                             </option>
                         <?php } ?>
                     </select>
@@ -87,7 +87,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                     <tr>
                         <th>#</th>
                         <th>ID Usuario</th>
-                        <th>ID / Nombre  Libro </th>
+                        <th>ID / Nombre Libro </th>
                         <th>Fecha de Préstamo</th>
                         <th>Fecha de Devolución</th>
                         <th>Devuelto</th>
@@ -97,14 +97,16 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                 <tbody>
                     <?php foreach ($prestado as $id => $prestamo) { ?>
                         <tr>
-                            <td><?php echo $id; ?></td>
+                            <td><?php echo $prestamo['id']; ?></td>
                             <td><?php echo $prestamo['idUser']; ?></td>
                             <td><?php echo  $prestamo['idBook']; ?></td>
-                            <td><?php echo date("d-m-Y", $prestamo['dateP']); ?></td>
-                            <td><?php echo date("d-m-Y", $prestamo['dateD']); ?></td>
+                            <td><?php echo  $prestamo['dateP']; ?></td>
+                            <td><?php echo  $prestamo['dateD']; ?></td>
                             <td>
+                                <!-- Cambios de estado del prestamo  -->
                                 <form action="../controller/controllerIndex.php?opcion=verPrestamos" method="POST">
-                                    <input type="hidden" name="prestamo" value="<?php echo $id; ?>">
+                                    <input type="hidden" name="prestamo" value="<?php echo $prestamo['id']; ?>">
+                                    <input type="hidden" name="idLibro" value="<?php echo $prestamo['idBook']; ?>">
                                     <select name="devuelto" class="form-select" onchange="this.form.submit()"
                                         style="color: <?php echo ($prestamo['devuelto']) ? 'green' : 'red'; ?>">
                                         <option value="1" <?php echo ($prestamo['devuelto']) ? 'selected' : ''; ?>
@@ -115,9 +117,10 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                                 </form>
                             </td>
                             <td>
+                                <!-- Ampliacion de dias de un prestamo  -->
                                 <?php if (!$prestamo['devuelto']) { ?>
                                     <form action="../controller/controllerIndex.php?opcion=verPrestamos" method="POST">
-                                        <input type="hidden" name="prestamo" value="<?php echo $id; ?>">
+                                        <input type="hidden" name="prestamo" value="<?php echo $prestamo['id']; ?>">
                                         <input type="number" id="dias" name="dias" min="0" style="width: 60px;" required>
                                         <button type="submit" class="btn btn-success btn-sm">Modificar</button>
                                     </form>
@@ -131,6 +134,6 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
             </table>
         </div>
     </div>
-<?php }else{
-header('Location:../controller/controllerIndex.php?opcion=zonaRestringida');
-}?>
+<?php } else {
+    header('Location:../controller/controllerIndex.php?opcion=zonaRestringida');
+} ?>

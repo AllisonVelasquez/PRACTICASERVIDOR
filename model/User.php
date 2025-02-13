@@ -17,7 +17,8 @@ class User
     }
     static function getAll()
     {
-        return  getAllByTable("users");
+     $a=getAllByTable("users");
+        return  $a;
     }
     static function delUser($user)
     {

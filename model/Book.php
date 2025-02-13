@@ -51,7 +51,7 @@ class Book
 
     static function prestar($id)
     {
-        $cant = getDataById('books', 'cantidad', $id);
+        $cant = getDataById('books', 'cantidad', $id)[0]['cantidad'];
         if (self::comprobarBook($id) && $cant > 0) {
             updateDatabyParam('books', ['cantidad' => $cant--], 'id', $id);
             return true;
@@ -61,7 +61,7 @@ class Book
 
     static function devuelto($id)
     {
-        $cant = getDataById('books', 'cantidad', $id);
+        $cant = getDataById('books', 'cantidad', $id)[0]['cantidad'];
         if (self::comprobarBook($id)) {
             updateDatabyParam('books', ['cantidad' => $cant++], 'id', $id);
             return true;

@@ -39,7 +39,7 @@ if (isset($_GET['opcion'])) {
                 break;
 
         }
-        if ($_SESSION['admin'] === true) {
+        if ($_SESSION['admin']) {
             switch ($opcion) {
                 case 'gestionUsuarios':
                     $users = User::getAll();
@@ -53,7 +53,7 @@ if (isset($_GET['opcion'])) {
                         if (isset($_POST['dias'])) {
                             Checkout::addDays($_POST['prestamo'], $_POST['dias']);
                         } else if (isset($_POST['devuelto'])) {
-                            Checkout::returnCheckout($_POST['prestamo'], boolval($_POST['devuelto']));
+                            Checkout::returnCheckout($_POST['prestamo'], $_POST['devuelto'], $_POST['idLibro']);
                         }
                     }
 

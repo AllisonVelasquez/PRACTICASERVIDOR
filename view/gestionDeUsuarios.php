@@ -15,7 +15,7 @@
 <?php
 foreach ($users as $key => $value) { ?>
     <tr>
-        <td><?php echo $key; ?></td>
+        <td><?php echo $value['id']; ?></td>
         <td><?php echo $value['nombre']; ?></td>
         <td><?php echo $value['correo']; ?></td>
         <td>
@@ -26,7 +26,7 @@ En ese ternario comprobamos el estado del usuario, y si es el que corresponde se
 -->
             <!-- Formulario para el campo "Admin" -->
             <form action="../controller/controllerUsuarios.php" method="GET">
-                <input type="hidden" name="user" value="<?php echo $key; ?>">
+                <input type="hidden" name="user" value="<?php echo $value['id']; ?>">
                 <select name="admin" class="form-select" onchange="this.form.submit()">
                     <option value="1" <?php echo ($value['admin']) ? 'selected' : ''; ?>>Admin</option>
                     <option value="0" <?php echo (!$value['admin']) ? 'selected' : ''; ?>>User</option>
@@ -36,7 +36,7 @@ En ese ternario comprobamos el estado del usuario, y si es el que corresponde se
         <td>
             <!-- Formulario para el campo "Bloqueado" -->
             <form action="../controller/controllerUsuarios.php" method="GET">
-                <input type="hidden" name="user" value="<?php echo $key; ?>">
+                <input type="hidden" name="user" value="<?php echo $value['id']; ?>">
                 <select name="blocked" class="form-select" onchange="this.form.submit()"
                     style="color: <?php echo ($value['blocked']) ? 'red' : 'green'; ?>">
                     <option value="1" <?php echo ($value['blocked']) ? 'selected' : ''; ?> style="color: red;">Bloqueado</option>
@@ -47,7 +47,7 @@ En ese ternario comprobamos el estado del usuario, y si es el que corresponde se
         <td>
             <!-- Botón para ver los préstamos -->
             <form action="../controller/controllerIndex.php?opcion=misPrestamos" method="POST">
-                <input type="hidden" name="usuario" value="<?php echo $key ;?>">
+                <input type="hidden" name="usuario" value="<?php echo $value['id'] ;?>">
                 <button type="submit" class="btn btn-success btn-sm">Ver Prestamos</button>
             </form>
         </td>

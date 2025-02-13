@@ -100,7 +100,7 @@ function updateDatabyParam($tabla, $paramsYvalues, $condicion, $valueCondicion)
             (is_string($value) ? $newData[] = "$key= '$value'" : $newData[] = "$key= $value");
         };
         $string = implode(',', $newData);
-        $consulta = "UPDATE $tabla SET $string WHERE $condicion=$valueCondicion";
+        $consulta = "UPDATE $tabla SET $string WHERE $condicion='$valueCondicion'";
         $resultado = $con->exec($consulta);
         if ($resultado == 0) $con->rollback();
         if ($resultado != 0) {

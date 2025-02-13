@@ -51,11 +51,12 @@ class Checkout
         
     }
 
-    static function returnCheckout($id, $valor)
+    static function returnCheckout($id, $valor, $idLibro)
     {
             if (self::comprobarCheckout($id)) {
                 $devolver = time();
-                Book::devuelto($id);
+                Book::devuelto($idLibro);
+                updateDatabyParam('checkouts', ['devuelto' => $valor], 'id', $id);
                 updateDatabyParam('checkouts', ['dateD' => $devolver], 'id', $id);
 
                 return "Libro devuelto";
