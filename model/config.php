@@ -2,4 +2,4 @@
 
 define("dsn", 'mysql:host=localhost;dbname=biblioteca');
 define("dbuser", 'admin');
-define("dbpass", 'admin_password');
+define("dbpass", 'admin');
