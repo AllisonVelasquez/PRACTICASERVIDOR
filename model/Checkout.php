@@ -22,10 +22,10 @@ class Checkout
     {
             if (self::comprobarCheckout($id)) {
 
-                $fecha = getDataById('checkouts', 'fechaD', $id);
+                $fecha = getDataById('checkouts', 'dateD', $id)[0]['dateD'];
                 $fecha = new DateTime($fecha);
                 $fecha->modify("+$cantidadDias days");
-                updateDatabyParam('checkouts', ['fechaD' => $fecha->format('Y-m-d')], 'id', $id);
+                updateDatabyParam('checkouts', ['dateD' => $fecha->format('Y-m-d')], 'id', $id);
             }
         
     }

@@ -121,7 +121,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['admin']) {
                                 <?php if (!$prestamo['devuelto']) { ?>
                                     <form action="../controller/controllerIndex.php?opcion=verPrestamos" method="POST">
                                         <input type="hidden" name="prestamo" value="<?php echo $prestamo['id']; ?>">
-                                        <input type="number" id="dias" name="dias" min="0" style="width: 60px;" required>
+                                        <input type="number" id="dias" name="dias" min="0" max="30" style="width: 60px;" required>
                                         <button type="submit" class="btn btn-success btn-sm">Modificar</button>
                                     </form>
                                 <?php } else { ?>
