@@ -35,7 +35,9 @@ if (isset($_GET['accion'])) {
 
                     // Crear carpeta si no existe
                     if (!file_exists("../img/")) {
-                        mkdir("../img/", 0777, true);
+                        //cuando no exite la carpeta img hay que asignar permisos de creacion 
+/*                         chmod('../',0777);
+ */                        mkdir("../img/", 0777, true);
                     }
 
                     if (move_uploaded_file($tmpName, $uploadFile)) {
