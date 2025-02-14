@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-02-2025 a las 09:19:30
--- Versión del servidor: 8.0.40-0ubuntu0.20.04.1
+-- Tiempo de generación: 14-02-2025 a las 12:47:53
+-- Versión del servidor: 8.0.41-0ubuntu0.20.04.1
 -- Versión de PHP: 7.4.3-4ubuntu2.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,20 +24,20 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS biblioteca;
 USE biblioteca;
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
---Para alison es admin_password :)
 
 -- Otorgar todos los privilegios sobre la base de datos 'biblioteca' al usuario 'admin_biblioteca'
 GRANT ALL PRIVILEGES ON biblioteca.* TO 'admin'@'localhost';
 
 -- Asegurarse de que los cambios en privilegios se apliquen
 FLUSH PRIVILEGES;
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `books`
 --
 
-CREATE TABLE `books` (
+CREATE TABLE IF NOT EXISTS `books` (
   `id` int NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `cantidad` int NOT NULL DEFAULT '1',
@@ -61,8 +61,7 @@ INSERT INTO `books` (`id`, `nombre`, `cantidad`, `autor`, `genero`, `descripcion
 (5, 'La sombra del viento', 10, 'Carlos Ruiz Zafón', 'Misterio', 'Un joven descubre un libro en un cementerio de libros olvidados, desatando una serie de misteriosos eventos.', '../img/la_sombra_del_viento.jpg', 1, 9),
 (6, 'Orgullo y prejuicio', -6, 'Jane Austen', 'Romance', 'La historia de Elizabeth Bennet y su relación con el orgulloso señor Darcy en la Inglaterra del siglo XIX.', '../img/orgullo_y_prejuicio.jpg', 1, 2),
 (7, 'Matar a un ruiseñor', 5, 'Harper Lee', 'Ficción', 'Una historia sobre la injusticia racial en el sur de Estados Unidos, vista a través de los ojos de una niña.', '../img/matar_a_un_ruisenor.jpg', 1, 5),
-(8, 'El alquimista', 5, 'Paulo Coelho', 'Ficción', 'La búsqueda de Santiago, un joven pastor que viaja en busca de un tesoro personal, en una alegoría sobre el destino.', '../img/el_alquimista.jpg', 1, 10),
-(9, 'erg', 2, 'sdfsdf', 'sdf', 'sweeeeeeeeeeeeeeeeeeeeeeee', '../img/erg.jpg', 1, 2);
+(8, 'El alquimista', 5, 'Paulo Coelho', 'Ficción', 'La búsqueda de Santiago, un joven pastor que viaja en busca de un tesoro personal, en una alegoría sobre el destino.', '../img/el_alquimista.jpg', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -70,7 +69,7 @@ INSERT INTO `books` (`id`, `nombre`, `cantidad`, `autor`, `genero`, `descripcion
 -- Estructura de tabla para la tabla `checkouts`
 --
 
-CREATE TABLE `checkouts` (
+CREATE TABLE IF NOT EXISTS `checkouts` (
   `id` int NOT NULL,
   `idBook` int NOT NULL,
   `idUser` varchar(255) NOT NULL,
@@ -80,40 +79,13 @@ CREATE TABLE `checkouts` (
   `solicitudAmpliacion` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Volcado de datos para la tabla `checkouts`
---
-
-INSERT INTO `checkouts` (`id`, `idBook`, `idUser`, `dateP`, `dateD`, `devuelto`, `solicitudAmpliacion`) VALUES
-(1, 1, 'joel', '2025-01-06 03:20:48', '2025-01-06 05:41:05', 1, 1),
-(2, 2, 'alicia', '2025-01-06 03:24:37', '2025-01-06 05:40:43', 1, 1),
-(3, 1, 'alicia', '2025-01-06 03:24:41', '2025-01-06 05:40:44', 1, 1),
-(4, 1, 'alicia', '2025-01-06 03:27:13', '2025-01-06 05:40:46', 1, 0),
-(5, 3, 'joel', '2025-01-06 04:04:16', '2025-01-21 04:04:16', 0, 0),
-(6, 3, 'joel', '2025-01-06 04:04:30', '2025-01-21 04:04:30', 0, 0),
-(7, 2, 'joel', '2025-01-06 04:54:32', '2025-01-21 04:54:32', 0, 0),
-(8, 2, 'joel', '2025-01-06 04:55:45', '2025-01-21 04:55:45', 0, 0),
-(9, 2, 'joel', '2025-01-06 04:56:10', '2025-01-21 04:56:10', 0, 0),
-(10, 2, 'joel', '2025-01-06 04:56:11', '2025-01-21 04:56:11', 0, 0),
-(11, 2, 'joel', '2025-01-06 04:56:11', '2025-01-21 04:56:11', 0, 0),
-(12, 2, 'joel', '2025-01-06 04:56:42', '2025-01-21 04:56:42', 0, 0),
-(13, 2, 'joel', '2025-01-06 04:56:43', '2025-01-21 04:56:43', 0, 0),
-(14, 2, 'joel', '2025-01-06 04:56:43', '2025-01-21 04:56:43', 0, 0),
-(15, 2, 'joel', '2025-01-06 04:56:43', '2025-01-21 04:56:43', 0, 0),
-(16, 2, 'joel', '2025-01-06 04:57:10', '2025-01-21 04:57:10', 0, 0),
-(17, 2, 'joel', '2025-01-06 04:57:11', '2025-01-21 04:57:11', 0, 0),
-(18, 2, 'joel', '2025-01-06 04:57:11', '2025-01-21 04:57:11', 0, 0),
-(19, 2, 'joel', '2025-01-06 04:57:11', '2025-01-21 04:57:11', 0, 0),
-(20, 2, 'joel', '2025-01-06 04:57:11', '2025-01-21 04:57:11', 0, 0),
-(21, 5, 'Juan', '2025-01-06 05:35:14', '2025-01-21 05:35:14', 0, 0);
-
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
@@ -127,10 +99,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nombre`, `pass`, `correo`, `admin`, `blocked`) VALUES
-('1212', '1212', '$2y$10$AVbQpQiy3IJQ09q4vv1Ri.Fjx0lMojdEgjDMkqGEzB69ydIQTyDze', 'alicia2@gmail', 0, 0),
-('alicia', 'alicia', '$2y$10$KzfnT78aXUhJ7.wHBOMAAOk3s52JjpEAUxydzJl/RfOD7A2BpyubG', 'alicia@gmail', 0, 0),
-('joel', 'joel', '$2y$10$t7eIyFKJXZ1g0JqsiskgOeHFFOcKUEngk9vyX.rGayAX7GHMA8cUq', 'joel@gmail.com', 1, 0),
-('Juan', 'Juan', '$2y$10$U0o8mf5OfECerZ7FbYg8tOQctOlFLlQDmzQSn/AI2X9Xu0iNK3CHK', 'Juan@gmail.com', 0, 0);
+('admin', 'admin', '$2y$10$yZmJlPRnOZPkzR9w6Bg8lujBnQ9s7cb1jdfF0qUv2NGjoXBRP8eFi', 'admin@admin.com', 0, 0);
 
 --
 -- Índices para tablas volcadas
