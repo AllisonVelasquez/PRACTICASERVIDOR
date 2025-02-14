@@ -100,12 +100,11 @@
                                 <p class="card-text"><strong>Descripción:</strong> <?php echo $book['descripcion']; ?></p>
                                 <?php
                                 if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])) {
-                                    echo '<a class="btn btn-success" href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' " role="button">Solicitar Prestamo</a>';
-                                    //echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $key . ' ">Solicitar préstamo </a></button>';
-
-                                    if ($_SESSION['admin'] === true) {
-                                        echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $key . ' ">Eliminar</a></button>';
-                                        echo '<button class="bg-primary"><a href="../controller/controllerRegistroLibros.php?accion=modificar&&id=' . $key . ' ">Modificar</a></button>';
+                                    echo '<a class="btn btn-success" href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $book['id'] . ' " role="button">Solicitar Prestamo</a>';
+                                    //echo '<button class="bg-success border rounded "><a href="../controller/controllerRegistroLibros.php?accion=prestar&&id=' . $book['id'] . ' ">Solicitar préstamo </a></button>';
+                                    if ($_SESSION['admin'] == true) {
+                                        echo '<button class="bg-danger"><a href="../controller/controllerRegistroLibros.php?accion=eliminar&&id=' . $book['id'] . ' ">Eliminar</a></button>';
+                                        echo '<button class="bg-primary"><a href="../controller/controllerRegistroLibros.php?accion=modificar&&id=' . $book['id'] . ' ">Modificar</a></button>';
                                     }
                                 } else {
                                     echo '<a href="../controller/controllerIndex.php?opcion=logIn">Iniciar Sesion</a>';
@@ -118,7 +117,7 @@
             </div>
         </div>
 
-        <?php
+    <?php
     } else {
         echo '<p class="text-center">No se encontraron libros con los criterios proporcionados.</p>';
     }

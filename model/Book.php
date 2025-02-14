@@ -36,7 +36,7 @@ class Book
 
     static function delBook($id)
     {
-        deleteById('books', $id);
+        return deleteById('books', $id);
     }
 
     static function comprobarBook($id)

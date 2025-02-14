@@ -4,30 +4,27 @@ require(__DIR__ . '/config.php');
 function conectar()
 {
     try {
-        
-            $con = new PDO(dsn, dbuser, dbpass, [
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            ]);
-        
+        $con = new PDO(dsn, dbuser, dbpass, [
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
+        ]);
+
         return $con;
     } catch (PDOException $e) {
-        echo 'error ' + $e->getMessage() + '<br>';
+        echo 'error ' . $e->getMessage() . '<br>';
     }
 }
 function getAllByTable($tabla)
 {
     try {
-        //code...
 
         $con = conectar();
         $sql = "SELECT * FROM $tabla";
         $data = $con->query($sql);
 
         return $data->fetchAll(PDO::FETCH_ASSOC);
-        
     } catch (PDOException $e) {
-        echo 'error ' + $e->getMessage() + '<br>';
+        echo 'error ' . $e->getMessage() . '<br>';
     }
 }
 
@@ -40,33 +37,27 @@ function getAllByParam($tabla, $param, $value)
         return $data->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
 
-        echo 'error ' + $e->getMessage() + '<br>';
+        echo 'error ' . $e->getMessage() . '<br>';
     }
 }
 function getDataById($tabla, $param, $id)
 {
     try {
-        $con = conectar(); // Asegúrate de que la función conectar() esté definida correctamente.
+        $con = conectar();
 
-        // Validamos que el parámetro $param sea válido (es decir, que sea un nombre de columna)
-        // Este paso es opcional y depende de cómo se gestionen las columnas en tu base de datos.
-        $sql = "SELECT $param FROM $tabla WHERE id = :id"; // Usamos un marcador de posición para el ID
+        $sql = "SELECT $param FROM $tabla WHERE id = :id";
         $stmt = $con->prepare($sql);
-        
-        // Vinculamos el valor de $id, el cual puede ser tanto un int como un string.
+
         if (is_int($id)) {
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         } else {
-            $stmt->bindParam(':id', $id, PDO::PARAM_STR); // Para cadenas
+            $stmt->bindParam(':id', $id, PDO::PARAM_STR);
         }
 
-        // Ejecutamos la consulta
         $stmt->execute();
 
-        // Retornamos los resultados como un array asociativo
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
-        // Concatenación de cadenas con el operador correcto
         echo 'Error: ' . $e->getMessage() . '<br>';
     }
 }
@@ -82,10 +73,11 @@ function deleteById($tabla, $id)
         if ($resultado == 0) $con->rollback();
         if ($resultado != 0) {
             $con->commit();
-            return $resultado;
+            return true;
         }
+        return false;
     } catch (PDOException $e) {
-        echo 'Error ' + $e->getMessage() + '<br>';
+        echo 'Error ' . $e->getMessage() . '<br>';
     }
 }
 
@@ -109,7 +101,7 @@ function updateDatabyParam($tabla, $paramsYvalues, $condicion, $valueCondicion)
         } else
             return false;
     } catch (PDOException $e) {
-        echo 'Error ' + $e->getMessage() + '<br>';
+        echo 'Error ' . $e->getMessage() . '<br>';
     }
 }
 
@@ -133,12 +125,3 @@ function insert($tabla, $paramsYvalues)
         echo 'ERRRO' . $e->getMessage() . '<br>';
     }
 }
-/* 
- insert('checkouts', [
-    'idUser' => 'alexy',
-    'idBook' => 1,
-    'dateP' => Date('Y-m-d',time()),
-    'dateD' => Date('Y-m-d',time() + 1296000),
-    'devuelto' => 0,
-    'solicitudAmpliacion' => 0,
-]);  */

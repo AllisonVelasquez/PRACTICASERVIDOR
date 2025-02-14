@@ -12,7 +12,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -59,7 +58,7 @@ INSERT INTO `books` (`id`, `nombre`, `cantidad`, `autor`, `genero`, `descripcion
 (3, 'Don Quijote de la Mancha', 8, 'Miguel de Cervantes', 'Clásicos', 'Las aventuras de un caballero idealista y su fiel escudero, en una obra que explora la locura y la realidad.', '../img/don_quijote_de_la_mancha.jpg', 1, 8),
 (4, 'Fahrenheit 451', 23, 'Ray Bradbury', 'Ciencia ficción', 'En un futuro distópico, los libros están prohibidos y los bomberos queman cualquier material literario encontrado.', '../img/farenheit_451.jpg', 1, 25),
 (5, 'La sombra del viento', 10, 'Carlos Ruiz Zafón', 'Misterio', 'Un joven descubre un libro en un cementerio de libros olvidados, desatando una serie de misteriosos eventos.', '../img/la_sombra_del_viento.jpg', 1, 9),
-(6, 'Orgullo y prejuicio', -6, 'Jane Austen', 'Romance', 'La historia de Elizabeth Bennet y su relación con el orgulloso señor Darcy en la Inglaterra del siglo XIX.', '../img/orgullo_y_prejuicio.jpg', 1, 2),
+(6, 'Orgullo y prejuicio', 6, 'Jane Austen', 'Romance', 'La historia de Elizabeth Bennet y su relación con el orgulloso señor Darcy en la Inglaterra del siglo XIX.', '../img/orgullo_y_prejuicio.jpg', 1, 2),
 (7, 'Matar a un ruiseñor', 5, 'Harper Lee', 'Ficción', 'Una historia sobre la injusticia racial en el sur de Estados Unidos, vista a través de los ojos de una niña.', '../img/matar_a_un_ruisenor.jpg', 1, 5),
 (8, 'El alquimista', 5, 'Paulo Coelho', 'Ficción', 'La búsqueda de Santiago, un joven pastor que viaja en busca de un tesoro personal, en una alegoría sobre el destino.', '../img/el_alquimista.jpg', 1, 10);
 
@@ -99,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `nombre`, `pass`, `correo`, `admin`, `blocked`) VALUES
-('admin', 'admin', '$2y$10$yZmJlPRnOZPkzR9w6Bg8lujBnQ9s7cb1jdfF0qUv2NGjoXBRP8eFi', 'admin@admin.com', 0, 0);
+('admin', 'admin', '$2y$10$yZmJlPRnOZPkzR9w6Bg8lujBnQ9s7cb1jdfF0qUv2NGjoXBRP8eFi', 'admin@admin.com', 1, 0);
 
 --
 -- Índices para tablas volcadas

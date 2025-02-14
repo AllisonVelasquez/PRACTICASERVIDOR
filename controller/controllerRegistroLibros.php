@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario'])) {
 
 if (isset($_GET['accion'])) {
     // Verificar si el usuario es administrador
-    $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
+    $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] == true;
 
     switch ($_GET['accion']) {
         case 'add':
@@ -96,9 +96,13 @@ if (isset($_GET['accion'])) {
             if ($isAdmin && isset($_GET['id'])) {
                 $id = intval($_GET['id']);
                 if (Book::delBook($id)) {
-                    $mensaje = "<h3 class='bg-success'>Libro eliminado exitosamente</h3>";
+                    echo '<div class="alert alert-primary" role="alert">
+                    Libro eliminado exitosamente <a href="../controller/controllerIndex.php?opcion=libros">Ver Libros</a>
+                    </div>';
                 } else {
-                    $mensaje = "<p>Error al eliminar el libro.</p>";
+                    echo '<div class="alert alert-primary" role="alert">
+                        Error al eliminar el libro.                   
+                        </div>';
                 }
             }
             break;
@@ -121,4 +125,3 @@ if (isset($_GET['accion'])) {
             break;
     }
 }
-?>

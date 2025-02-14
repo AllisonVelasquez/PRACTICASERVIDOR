@@ -2,7 +2,7 @@
 
  
 HOST="localhost"
-USER="usuario" # Aqui se debe introducir el nombre del usuario en Mysql/PHPMyadmin
+USER="usuario" # Aqui se debe introducir el nombre del usuario de Mysql/PHPMyadmin
 PASS="contraseña" # Y aqui la contraseña
 DBNAME="biblioteca"
 SQL_FILE="biblioteca.sql"  
